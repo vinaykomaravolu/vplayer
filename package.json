@@ -1,6 +1,6 @@
 {
   "name": "vplayer",
-  "productName": "Vplayer",
+  "productName": "vplayer",
   "description": "Native desktop music player for windows, linux, mac",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
@@ -86,7 +86,7 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "vplayer",
+      "owner": "vinaykomaravolu",
       "repo": "vplayer"
     }
   },
@@ -101,6 +101,9 @@
   },
   "contributors": [],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+  },
   "keywords": [
     "electron",
     "boilerplate",
@@ -112,6 +115,7 @@
     "hot",
     "reload"
   ],
+  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
