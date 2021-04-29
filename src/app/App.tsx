@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Howl } from 'howler';
 import icon from '../assets/icon.svg';
 import './App.global.css';
-import { Howl } from 'howler';
 
 const { ipcRenderer } = require('electron');
 
@@ -39,7 +39,7 @@ const Home = () => {
         <ul>
           {files.map((file, key) => {
             return (
-              <li key={file + key}>
+              <li key={file}>
                 <div className="font-bold">{file}</div>
                 <button
                   type="button"
