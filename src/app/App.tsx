@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
