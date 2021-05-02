@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  useTransition,
+  animated,
+  config,
+  Spring,
+  useSpring,
+} from 'react-spring';
 
 function NavLink({
   to = '/',
@@ -72,11 +80,32 @@ const SettingsIcon = (
 
 function Nav() {
   const { pathname } = useLocation();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <div
       data-testid="nav"
-      className="flex-col items-center flex-shrink-0 w-12 h-screen bg-primary3 shadow-2xl"
+      className={`transition-width transition-slowest ease duration-250 ease-in-out flex-col items-center flex-shrink-0 ${
+        isOpen ? 'w-12' : 'w-48'
+      } h-screen bg-primary3 shadow-2xl`}
     >
+      <button
+        type="button"
+        className="px-3.5 py-3 hover:bg-primary block text-white focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 fill-current text-secondary"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fillRule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
       <NavLink
         data-testid="home-link"
         to="/home"

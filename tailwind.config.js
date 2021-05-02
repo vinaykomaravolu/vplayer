@@ -10,7 +10,10 @@ module.exports = {
         primary2: '#151A21',
         primary3: '#242C37',
         secondary: '#FFD700',
-        secondary2: '#F49F1C',
+        secondary2: '#F2AA4C',
+      },
+      transitionProperty: {
+        width: 'width',
       },
     },
   },
