@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  useTransition,
-  animated,
-  config,
-  Spring,
-  useSpring,
-} from 'react-spring';
 
 function NavLink({
   to = '/',
