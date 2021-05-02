@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect, useState, Suspense } from 'react';
+import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
-import icon from '../assets/icon.svg';
+import Home from './pages/Home';
+import AllMusic from './pages/AllMusic';
+import Playlists from './pages/Playlists';
+import Settings from './pages/Settings';
+import Nav from './components/Nav';
+import WindowNav from './components/WindowNav';
 import './App.global.css';
 
 const { ipcRenderer } = require('electron');
 
-const Home = () => {
+const TestC = () => {
   const [files, setFiles] = useState<string[]>([]);
   const [searchpath, setSearchPath] = useState<string>('');
+  const [theme, setTheme] = useState<boolean>(true);
 
   ipcRenderer.on('asynchronous-reply', (event: any, arg: any) => {
     setFiles(arg);
@@ -19,13 +26,32 @@ const Home = () => {
       ERB + TAILWIND = ❤
       <button
         type="button"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         onClick={() => {
           ipcRenderer.send('asynchronous-message', searchpath);
         }}
       >
         Find Music
       </button>
+      <div className="overflow-auto h-12">
+        Lorem ipsum dolor sLorem ipsum dolor sit amet..Lorem ipsum dolor sit
+        amet..Lorem ipsum dolor sit amet..Lorem ipsum dolor sit amet..Lorem
+        ipsum dolor sit amet..Lorem ipsum dolor sit amet..Lorem ipsum dolor sit
+        amet..Lorem ipsum dolor sit amet..Lorem ipsum dolor sit amet..Lorem
+        ipsum dolor sit amet..Lorem ipsum dolor sit amet..Lorem ipsum dolor sit
+        amet..Lorem ipsum dolor sit amet..Lorem ipsum dolor sit amet..Lorem
+        ipsum dolor sit amet..Lorem ipsum dolor sit amet..it amet...
+      </div>
+      <div className="theme-light">
+        <input
+          type="checkbox"
+          checked={theme}
+          onChange={() => setTheme(!theme)}
+        />
+        <button className="bg-primary" type="button">
+          Hello
+        </button>
+      </div>
       <div className="mb-3 pt-0">
         <input
           type="text"
@@ -75,10 +101,27 @@ const Home = () => {
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Home} />
-      </Switch>
-    </Router>
+    <Suspense fallback={<TestC />}>
+      <BrowserRouter>
+        <div
+          data-testid="app"
+          className="bg-gradient-to-t from-primary to-primary3 flex flex-row"
+        >
+          <WindowNav />
+          <Nav />
+          <div className="flex-1">
+            <AnimatePresence>
+              <Switch>
+                <Route path="/home" component={Home} />
+                <Route exact path="/allmusic" component={AllMusic} />
+                <Route exact path="/playlists" component={Playlists} />
+                <Route exact path="/settings" component={Settings} />
+                <Redirect exact path="/" to="/home" />
+              </Switch>
+            </AnimatePresence>
+          </div>
+        </div>
+      </BrowserRouter>
+    </Suspense>
   );
 }

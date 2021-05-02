@@ -14,7 +14,6 @@ import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import * as fs from 'fs';
-import MenuBuilder from './menu';
 
 const path = require('path');
 
@@ -76,7 +75,9 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
+    frame: false,
   });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
@@ -98,9 +99,6 @@ const createWindow = async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
 
   // Open urls in the user's browser
   mainWindow.webContents.on('new-window', (event, url) => {
@@ -135,12 +133,11 @@ app.on('activate', () => {
 
 // IPC testing
 // In main process.
+const { ipcMain } = require('electron');
 
 // Example code for render and main process interaction
-const { ipcMain } = require('electron');
-const recursive = require('recursive-readdir');
-
 const ignorefiles = ['*.html'];
+const recursive = require('recursive-readdir');
 
 ipcMain.on('asynchronous-message', (event: any, arg: any) => {
   recursive(arg, ignorefiles, (err: any, files: File[]) => {
@@ -153,6 +150,5 @@ ipcMain.on('asynchronous-message', (event: any, arg: any) => {
 });
 
 ipcMain.on('synchronous-message', (event: any, arg: any) => {
-  console.log(arg); // prints "ping"
   event.returnValue = 'pong';
 });
