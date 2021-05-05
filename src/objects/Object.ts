@@ -1,3 +1,7 @@
+export interface Collection {
+  name: string;
+}
+
 export interface Song {
   name: string;
   artist: string;
@@ -6,8 +10,7 @@ export interface Song {
   path: string[];
 }
 
-export interface Playlist {
-  name: string;
+export interface Playlist extends Collection {
   song: Song[];
 }
 
@@ -15,7 +18,6 @@ export interface Paths {
   paths: string[];
 }
 
-export interface Album {
-  name: string;
+export interface Album extends Collection {
   album: Playlist;
 }
