@@ -5,22 +5,32 @@ function NavLink({
   to = '/',
   isActive = false,
   icon,
-  tooltip = '',
+  title = '',
+  isTitleEnabled,
 }: {
   to: string;
   isActive: boolean;
   icon: React.ReactElement;
-  tooltip: string;
+  title: string;
+  isTitleEnabled: boolean;
 }) {
   return (
     <Link
       to={to}
-      title={tooltip}
-      className={`p-3 hover:bg-primary2 block text-white ${
+      className={`px-3 py-2 hover:bg-primary2 block text-white ${
         isActive ? 'bg-primary2' : 'hover:bg-primary2'
       }`}
     >
-      {icon}
+      <span className="inline-grid grid-cols-4">
+        {icon}
+        {isTitleEnabled ? (
+          <span>
+            <div className="transition delay-150 duration-300 ease-in-out">
+              {title}
+            </div>
+          </span>
+        ) : null}
+      </span>
     </Link>
   );
 }
@@ -28,7 +38,7 @@ function NavLink({
 const HomeIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className=" h-5 w-5 fill-current text-secondary"
+    className=" h-6 w-5 fill-current text-secondary"
     viewBox="0 0 20 20"
   >
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -38,7 +48,7 @@ const HomeIcon = (
 const AllMusicIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current text-secondary"
     viewBox="0 0 20 20"
   >
     <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
@@ -48,7 +58,7 @@ const AllMusicIcon = (
 const PlaylistsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current text-secondary"
     viewBox="0 0 20 20"
   >
     <path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM15 3a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2z" />
@@ -58,7 +68,7 @@ const PlaylistsIcon = (
 const SettingsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current text-secondary"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -103,28 +113,32 @@ function Nav() {
         to="/home"
         isActive={pathname.includes('/home')}
         icon={HomeIcon}
-        tooltip="Home"
+        title="Home"
+        isTitleEnabled={!isOpen}
       />
       <NavLink
         data-testid="allmusic-link"
         to="/allmusic"
         isActive={pathname.includes('/allmusic')}
         icon={AllMusicIcon}
-        tooltip="All Music"
+        title="Music"
+        isTitleEnabled={!isOpen}
       />
       <NavLink
         data-testid="playlists-link"
         to="/playlists"
         isActive={pathname.includes('/playlists')}
         icon={PlaylistsIcon}
-        tooltip="Playlists"
+        title="Playlists"
+        isTitleEnabled={!isOpen}
       />
       <NavLink
         data-testid="settings-link"
         to="/settings"
         isActive={pathname.includes('/settings')}
         icon={SettingsIcon}
-        tooltip="settings"
+        title="Settings"
+        isTitleEnabled={!isOpen}
       />
     </div>
   );
