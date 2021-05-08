@@ -134,6 +134,11 @@ export default function App() {
               <MusicPlayer />
             </div>
           </div>
+          <div>
+            <NavLink to="/Player" component={MusicPlayer}>
+              Player
+            </NavLink>
+          </div>
         </div>
       </BrowserRouter>
     </Suspense>
