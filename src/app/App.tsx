@@ -117,8 +117,10 @@ export default function App() {
               className="bg-gradient-to-t from-primary to-primary3 flex flex-row h-full overflow-y-auto"
             >
               <WindowNav />
-              <Nav />
-              <div className="flex-1 overflow-x-hidden">
+              <div className="h-full">
+                <Nav />
+              </div>
+              <div className="flex-1 overflow-x-hidden z-0 mt-7">
                 <AnimatePresence>
                   <Switch>
                     <Route path="/home" component={Home} />
@@ -133,11 +135,6 @@ export default function App() {
             <div className="h-28 w-full">
               <MusicPlayer />
             </div>
-          </div>
-          <div>
-            <NavLink to="/Player" component={MusicPlayer}>
-              Player
-            </NavLink>
           </div>
         </div>
       </BrowserRouter>
