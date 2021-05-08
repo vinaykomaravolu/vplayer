@@ -124,7 +124,7 @@ function Settings() {
         </div>
       </div>
       <div id="settings-musiclocation">
-        <div className="section-subtitl">Preferences</div>
+        <div className="section-subtitle">Preferences</div>
         <div
           id="prefernces-colors"
           className="flex flex-row flex-wrap w-full p-2"
