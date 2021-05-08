@@ -110,27 +110,29 @@ export default function App() {
   return (
     <Suspense fallback={<TestC />}>
       <BrowserRouter>
-        <div
-          data-testid="app"
-          className="bg-gradient-to-t from-primary to-primary3 flex flex-row"
-        >
-          <WindowNav />
-          <Nav />
-          <div className="flex-1 overflow-x-hidden">
-            <AnimatePresence>
-              <Switch>
-                <Route path="/home" component={Home} />
-                <Route exact path="/allmusic" component={AllMusic} />
-                <Route exact path="/playlists" component={Playlists} />
-                <Route exact path="/settings" component={Settings} />
-                <Redirect exact path="/" to="/home" />
-              </Switch>
-            </AnimatePresence>
-          </div>
-          <div>
-            <NavLink to="/Player" component={MusicPlayer}>
-              Player
-            </NavLink>
+        <div className="w-screen h-screen">
+          <div className="h-full w-full flex flex-col">
+            <div
+              data-testid="app"
+              className="bg-gradient-to-t from-primary to-primary3 flex flex-row h-full overflow-y-auto"
+            >
+              <WindowNav />
+              <Nav />
+              <div className="flex-1 overflow-x-hidden">
+                <AnimatePresence>
+                  <Switch>
+                    <Route path="/home" component={Home} />
+                    <Route exact path="/allmusic" component={AllMusic} />
+                    <Route exact path="/playlists" component={Playlists} />
+                    <Route exact path="/settings" component={Settings} />
+                    <Redirect exact path="/" to="/home" />
+                  </Switch>
+                </AnimatePresence>
+              </div>
+            </div>
+            <div className="h-28 w-full">
+              <MusicPlayer />
+            </div>
           </div>
         </div>
       </BrowserRouter>

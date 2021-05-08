@@ -24,9 +24,6 @@ module.exports = {
         '::-webkit-scrollbar-track': {
           backgroundColor: '#000',
         },
-        '.skew-15deg': {
-          transform: 'skewY(-15deg)',
-        },
       };
 
       addUtilities(newUtilities);

@@ -11,7 +11,7 @@ nav {
 
 @layer components {
   .section-page {
-    @apply p-8 h-screen my-auto overflow-y-auto;
+    @apply p-8 h-auto my-auto overflow-y-auto;
   }
 
   .section-title {

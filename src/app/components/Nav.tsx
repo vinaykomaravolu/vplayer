@@ -87,9 +87,9 @@ function Nav() {
   return (
     <div
       data-testid="nav"
-      className={`transition-width transition-slowest ease duration-250 ease-in-out flex-col items-center flex-shrink-0 ${
+      className={`transition-width transition-slowest ease duration-250 ease-in-out flex-col items-center flex-shrink-1 ${
         isOpen ? 'w-12' : 'w-48'
-      } h-screen bg-primary3 shadow-2xl`}
+      } h-full bg-primary3 shadow-2xl`}
     >
       <button
         type="button"
