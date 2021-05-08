@@ -109,7 +109,7 @@ export default function App() {
         >
           <WindowNav />
           <Nav />
-          <div className="flex-1">
+          <div className="flex-1 overflow-x-hidden">
             <AnimatePresence>
               <Switch>
                 <Route path="/home" component={Home} />

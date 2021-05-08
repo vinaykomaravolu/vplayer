@@ -8,3 +8,17 @@ nav {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .section-page {
+    @apply p-8 h-screen my-auto overflow-y-auto;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold p-2 text-secondary;
+  }
+
+  .section-subtitle {
+    @apply text-xl font-bold p-2 text-white;
+  }
+}

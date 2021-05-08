@@ -13,6 +13,7 @@ function AllMusic() {
       initial="initial"
       animate="animate"
       exit="exit"
+      className="section-page"
     />
   );
 }
