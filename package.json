@@ -94,11 +94,7 @@
     "type": "git",
     "url": "git+https://github.com/vinaykomaravolu/vplayer.git"
   },
-  "author": {
-    "name": "Vplayer Devs",
-    "email": "vplayer@gmail.com",
-    "url": "https://github.com/vinaykomaravolu/vplayer"
-  },
+  "author": "Vplayer Devs <vplayer@gmail.com> (https://github.com/vinaykomaravolu/vplayer)",
   "contributors": [],
   "license": "MIT",
   "bugs": {
@@ -292,5 +288,7 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "version": "1.0.0",
+  "main": ".eslintrc.js"
 }
