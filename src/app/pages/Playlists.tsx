@@ -13,6 +13,7 @@ function Playlists() {
       initial="initial"
       animate="animate"
       exit="exit"
+      className="section-page"
     />
   );
 }

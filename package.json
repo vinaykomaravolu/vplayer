@@ -94,11 +94,7 @@
     "type": "git",
     "url": "git+https://github.com/vinaykomaravolu/vplayer.git"
   },
-  "author": {
-    "name": "Vplayer Devs",
-    "email": "vplayer@gmail.com",
-    "url": "https://github.com/vinaykomaravolu/vplayer"
-  },
+  "author": "Vplayer Devs <vplayer@gmail.com> (https://github.com/vinaykomaravolu/vplayer)",
   "contributors": [],
   "license": "MIT",
   "bugs": {
@@ -249,8 +245,10 @@
     "framer-motion": "^4.1.11",
     "history": "^5.0.0",
     "howler": "^2.2.1",
+    "rc-slider": "^9.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "recursive-readdir": "^2.2.2",
     "regenerator-runtime": "^0.13.5",
@@ -292,5 +290,7 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "version": "1.0.0",
+  "main": ".eslintrc.js"
 }

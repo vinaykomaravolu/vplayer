@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function NavLink({
   to = '/',
@@ -17,17 +18,21 @@ function NavLink({
   return (
     <Link
       to={to}
-      className={`px-3 py-2 hover:bg-primary2 block text-white ${
+      className={`hover:bg-primary2 block text-white ${
         isActive ? 'bg-primary2' : 'hover:bg-primary2'
       }`}
     >
-      <span className="inline-grid grid-cols-4">
+      <span className="inline-grid grid-cols-4 px-3 py-2">
         {icon}
         {isTitleEnabled ? (
           <span>
-            <div className="transition delay-150 duration-300 ease-in-out">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.05 }}
+            >
               {title}
-            </div>
+            </motion.div>
           </span>
         ) : null}
       </span>
@@ -87,13 +92,13 @@ function Nav() {
   return (
     <div
       data-testid="nav"
-      className={`transition-width transition-slowest ease duration-250 ease-in-out flex-col items-center flex-shrink-0 ${
-        isOpen ? 'w-12' : 'w-48'
-      } h-screen bg-primary3 shadow-2xl`}
+      className={`transition-width transition-slowest ease duration-250 ease-in-out flex flex-col flex-shrink-1 ${
+        isOpen ? 'w-11' : 'w-48'
+      } h-full bg-primary3 shadow-2xl`}
     >
       <button
         type="button"
-        className="px-3.5 py-3 hover:bg-primary block text-white focus:outline-none"
+        className="px-3 py-3 hover:bg-primary block text-white focus:outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg
@@ -132,14 +137,16 @@ function Nav() {
         title="Playlists"
         isTitleEnabled={!isOpen}
       />
-      <NavLink
-        data-testid="settings-link"
-        to="/settings"
-        isActive={pathname.includes('/settings')}
-        icon={SettingsIcon}
-        title="Settings"
-        isTitleEnabled={!isOpen}
-      />
+      <div className="flex flex-col h-full justify-end">
+        <NavLink
+          data-testid="settings-link"
+          to="/settings"
+          isActive={pathname.includes('/settings')}
+          icon={SettingsIcon}
+          title="Settings"
+          isTitleEnabled={!isOpen}
+        />
+      </div>
     </div>
   );
 }

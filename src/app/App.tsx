@@ -1,5 +1,11 @@
 import React, { useState, Suspense } from 'react';
-import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Switch,
+  Redirect,
+  Route,
+  NavLink,
+} from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
 import Home from './pages/Home';
@@ -9,6 +15,7 @@ import Settings from './pages/Settings';
 import Nav from './components/Nav';
 import WindowNav from './components/WindowNav';
 import './App.global.css';
+import MusicPlayer from './components/MusicPlayer';
 
 const { ipcRenderer } = require('electron');
 
@@ -103,22 +110,36 @@ export default function App() {
   return (
     <Suspense fallback={<TestC />}>
       <BrowserRouter>
-        <div
-          data-testid="app"
-          className="bg-gradient-to-t from-primary to-primary3 flex flex-row"
-        >
-          <WindowNav />
-          <Nav />
-          <div className="flex-1">
-            <AnimatePresence>
-              <Switch>
-                <Route path="/home" component={Home} />
-                <Route exact path="/allmusic" component={AllMusic} />
-                <Route exact path="/playlists" component={Playlists} />
-                <Route exact path="/settings" component={Settings} />
-                <Redirect exact path="/" to="/home" />
-              </Switch>
-            </AnimatePresence>
+        <div className="w-screen h-screen">
+          <div className="h-full w-full flex flex-col">
+            <div
+              data-testid="app"
+              className="bg-gradient-to-t from-primary to-primary3 flex flex-row h-full overflow-y-auto"
+            >
+              <WindowNav />
+              <div className="h-full">
+                <Nav />
+              </div>
+              <div className="flex-1 overflow-x-hidden z-0 mt-7">
+                <AnimatePresence>
+                  <Switch>
+                    <Route path="/home" component={Home} />
+                    <Route exact path="/allmusic" component={AllMusic} />
+                    <Route exact path="/playlists" component={Playlists} />
+                    <Route exact path="/settings" component={Settings} />
+                    <Redirect exact path="/" to="/home" />
+                  </Switch>
+                </AnimatePresence>
+              </div>
+            </div>
+            <div className="h-28 w-full">
+              <MusicPlayer />
+            </div>
+          </div>
+          <div>
+            <NavLink to="/Player" component={MusicPlayer}>
+              Player
+            </NavLink>
           </div>
         </div>
       </BrowserRouter>
