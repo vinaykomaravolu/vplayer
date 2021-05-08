@@ -1,5 +1,11 @@
 import React, { useState, Suspense } from 'react';
-import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Switch,
+  Redirect,
+  Route,
+  NavLink,
+} from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
 import Home from './pages/Home';
@@ -9,6 +15,7 @@ import Settings from './pages/Settings';
 import Nav from './components/Nav';
 import WindowNav from './components/WindowNav';
 import './App.global.css';
+import MusicPlayer from './components/MusicPlayer';
 
 const { ipcRenderer } = require('electron');
 
@@ -119,6 +126,11 @@ export default function App() {
                 <Redirect exact path="/" to="/home" />
               </Switch>
             </AnimatePresence>
+          </div>
+          <div>
+            <NavLink to="/Player" component={MusicPlayer}>
+              Player
+            </NavLink>
           </div>
         </div>
       </BrowserRouter>
