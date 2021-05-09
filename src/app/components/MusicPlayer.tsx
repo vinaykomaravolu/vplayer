@@ -18,6 +18,7 @@ import {
   shuffleIconOf,
 } from './icons';
 
+<<<<<<< HEAD
 const IconButton = (props: { icon: any; handleClick: () => void }) => {
   const { icon, handleClick } = props;
 
@@ -35,6 +36,30 @@ const IconButton = (props: { icon: any; handleClick: () => void }) => {
     </motion.button>
   );
 };
+=======
+const PlayIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+>>>>>>> "changes slider property"
 
 const progressBar = () => {
   return (
@@ -104,12 +129,28 @@ function MusicPlayer() {
 
   return (
     <div className="bg-primary3 flex flex-row justify-center h-full w-full">
+<<<<<<< HEAD
       <div className="w-1/5 h-full flex flex-row">
         <div className="h-0 w-0  md:h-28 md:w-28">
           <img
             src={DefaultImage}
             alt={DefaultImage}
             className="h-full w-full object-cover p-2"
+=======
+      <div className="flex flex-col w-full justify-center">
+        <div className="flex flex-row justify-center">
+          <div className="">BACK</div>
+          <div className="">PLAY</div>
+          <div className="">FRONT</div>
+        </div>
+        <div className="flex flex-row justify-center">
+          <Slider
+            style={{ width: '50%' }}
+            reverse={false}
+            min={0}
+            max={100}
+            step={1}
+>>>>>>> "changes slider property"
           />
         </div>
 
