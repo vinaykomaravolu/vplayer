@@ -4,13 +4,6 @@ import React from 'react';
 import Slider, { Range } from 'rc-slider';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 
-const settings = {
-  start: 2,
-  min: 0,
-  max: 10,
-  step: 1,
-};
-
 const PlayIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -63,8 +56,10 @@ function MusicPlayer() {
         <div className="flex flex-row justify-center">
           <Slider
             style={{ width: '50%' }}
-            inverted={false}
-            settings={settings}
+            reverse={false}
+            min={0}
+            max={100}
+            step={1}
           />
         </div>
       </div>
