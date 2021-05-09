@@ -18,24 +18,6 @@ import {
   shuffleIconOf,
 } from './icons';
 
-const IconButton = (props: { icon: any; handleClick: () => void }) => {
-  const { icon, handleClick } = props;
-
-  return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      type="button"
-      className="section-subtitle text-secondary subpixel-antialiased focus:outline-none hover:text-secondary2"
-      onClick={() => {
-        handleClick();
-      }}
-    >
-      {icon}
-    </motion.button>
-  );
-};
-
 const progressBar = () => {
   return (
     <Slider
@@ -51,6 +33,24 @@ const progressBar = () => {
         opacity: 0.5,
       }}
     />
+  );
+};
+
+const IconButton = (props: { icon: any; handleClick: () => void }) => {
+  const { icon, handleClick } = props;
+
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      type="button"
+      className="section-subtitle text-secondary  subpixel-antialiased focus:outline-none hover:text-secondary2"
+      onClick={() => {
+        handleClick();
+      }}
+    >
+      {icon}
+    </motion.button>
   );
 };
 
