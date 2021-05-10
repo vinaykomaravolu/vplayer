@@ -78,10 +78,13 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
       />
       <button
         type="button"
+        disabled={!searchIsOpen}
         onClick={() => {
           setSearchIsOpen(!searchIsOpen);
         }}
-        className="focus:outline-none absolute top-1 left-2 text-secondary hover:text-secondary2"
+        className={`focus:outline-none absolute top-1 left-2 text-secondary  ${
+          searchIsOpen ? 'hover:text-secondary2 ' : 'pointer-events-none'
+        }`}
       >
         {SearchIcon}
       </button>
