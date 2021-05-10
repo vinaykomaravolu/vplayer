@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
+import MusicTable from '../components/MusicTable';
+import { Song } from '../../objects/Object';
 
 const PlayIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-10 w-10"
+    className="h-16 w-16"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -24,19 +26,28 @@ const pageVariants = {
 };
 
 function AllMusic() {
-  const [songs, setSongs] = useState<any>([]);
+  const [songs, setSongs] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
-    const songsList = [];
-    for (let i = 0; i < 1000; i += 1) {
-      songsList.push(
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="bg-gradient-to-r m-1 p-6 from-secondary via-red-500 to-red-500  rounded-full opacity-30"
-        />
-      );
+    const songsList: Song[] = [];
+    for (let i = 0; i < 100; i += 1) {
+      songsList.push({
+        name: Math.random().toString(36).substring(7),
+        artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+        length: 197,
+        publish_year: 1998,
+        path: ['A:\\Music\\Pulse'],
+        album: Math.random().toString(36).substring(7),
+      });
+      songsList.push({
+        name: Math.random().toString(36).substring(7),
+        artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+        length: 200,
+        publish_year: 1998,
+        path: ['A:\\Music\\Pulse'],
+        album: Math.random().toString(36).substring(7),
+      });
     }
     setSongs(songsList);
   }, []);
@@ -72,7 +83,7 @@ function AllMusic() {
             />
           </div>
         </div>
-        <div className="flex flex-col h-full overflow-y-auto">{songs}</div>
+        <MusicTable data={songs} />
       </div>
     </motion.div>
   );

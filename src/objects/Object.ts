@@ -4,10 +4,11 @@ export interface Collection {
 
 export interface Song {
   name: string;
-  artist: string;
+  artists: string[];
   length: number; // in seconds
   publish_year: number;
   path: string[];
+  album: string;
 }
 
 export interface Playlist extends Collection {
