@@ -92,7 +92,7 @@ function Settings() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             type="button"
-            className="section-subtitle  subpixel-antialiased focus:outline-none hover:text-secondary"
+            className="section-subtitle  subpixel-antialiased focus:outline-none hover:text-secondary2 text-secondary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
