@@ -9,7 +9,7 @@ function MusicTable({ data }: { data: Song[] }) {
   const [sortAsc, setSortAsc] = useState<boolean>(true);
 
   return (
-    <div className="flex flex-col h-full divide-y divide-yellow-500 pr-4 pl-4">
+    <div className="flex flex-col h-full divide-y divide-yellow-500  overflow-y-auto">
       <div
         id="headers"
         className={`grid grid-cols-12
@@ -31,7 +31,7 @@ function MusicTable({ data }: { data: Song[] }) {
         >
           <div className="flex flex-row items-center">
             TITLE
-            {sortBy === 'title' ? (
+            {sortBy === 'name' ? (
               sortAsc ? (
                 <div id="icon-sort" className="pr-1 pl-1">
                   <GoTriangleUp />{' '}
@@ -41,7 +41,7 @@ function MusicTable({ data }: { data: Song[] }) {
                   <GoTriangleDown />{' '}
                 </div>
               )
-            ) : null}{' '}
+            ) : null}
           </div>
         </motion.button>
         <motion.button
@@ -199,6 +199,9 @@ function MusicTable({ data }: { data: Song[] }) {
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 id={`song-${i}`}
+                onClick={(event) => {
+                  console.log(song);
+                }}
               >
                 <div className="col-span-4 flex items-center truncate mr-4 pl-5">
                   {song.name}
