@@ -3,6 +3,7 @@ import { Path } from 'history';
 export interface Collection {
   name: string;
   songs: Song[];
+  image?: string;
 }
 
 export interface Song {
@@ -14,9 +15,7 @@ export interface Song {
   album: string;
 }
 
-export interface Playlist extends Collection {
-  image?: Path;
-}
+export type Playlist = Collection;
 
 export interface Paths {
   paths: string[];
@@ -24,5 +23,4 @@ export interface Paths {
 
 export interface Album extends Collection {
   artists: string[];
-  image?: Path;
 }

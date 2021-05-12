@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
+import { Collection } from '../../objects/Object';
+import MusicTable from '../components/MusicTable';
+import DefaultImage from '../../../assets/images/default.png';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -10,6 +13,116 @@ const pageVariants = {
 
 function Collections() {
   const { id }: { id: string } = useParams();
+  const [collection, SetCollection] = useState<Collection>({
+    name: '',
+    songs: [],
+  });
+
+  useEffect(() => {
+    const playlist = {
+      songs: [
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 197,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+        {
+          name: Math.random().toString(36).substring(7),
+          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
+          length: 200,
+          publish_year: 1998,
+          path: ['A:\\Music\\Pulse'],
+          album: Math.random().toString(36).substring(7),
+        },
+      ],
+      name: id,
+    };
+    SetCollection(playlist);
+  }, []);
+
   return (
     <motion.div
       variants={pageVariants}
@@ -19,7 +132,7 @@ function Collections() {
       id="settings"
       className="section-page"
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full h-full">
         <Link to="/playlists">
           <motion.button
             id="back"
@@ -42,10 +155,18 @@ function Collections() {
             </svg>
           </motion.button>
         </Link>
-        <div className="section-title">{id}</div>
+        <div className="flex flex-row w-full flex flex-nowrap">
+          <img
+            src={collection.image ? collection.image : DefaultImage}
+            alt={DefaultImage}
+            className="rounded-md w-64 h-64 object-cover"
+          />
+          <div className="text-secondary truncate text-5xl font-bold flex items-center">
+            {collection.name}
+          </div>
+        </div>
+        <MusicTable data={collection.songs} />
       </div>
-
-      {id}
     </motion.div>
   );
 }
