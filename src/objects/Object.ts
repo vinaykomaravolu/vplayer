@@ -1,5 +1,8 @@
+import { Path } from 'history';
+
 export interface Collection {
   name: string;
+  songs: Song[];
 }
 
 export interface Song {
@@ -12,7 +15,7 @@ export interface Song {
 }
 
 export interface Playlist extends Collection {
-  song: Song[];
+  image?: Path;
 }
 
 export interface Paths {
@@ -20,5 +23,6 @@ export interface Paths {
 }
 
 export interface Album extends Collection {
-  album: Playlist;
+  artists: string[];
+  image?: Path;
 }
