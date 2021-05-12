@@ -57,6 +57,11 @@ const IconButton = (props: { icon: any; handleClick: () => void }) => {
 
 function MusicPlayer() {
   const [isTimelineHover, setIsTimelineHover] = useState<boolean>(false);
+  let currentTime = 0;
+
+  function updateCurrentTime(time: number) {
+    currentTime = time;
+  }
 
   return (
     <div className="bg-primary3 flex flex-row justify-center h-full w-full">
@@ -73,7 +78,7 @@ function MusicPlayer() {
           </div>
         </div>
         <div className="flex flex-row justify-center w-full ">
-          <div className="text-sm pr-3 pl-3 text-white "> Timer1 </div>
+          <div className="text-sm pr-3 pl-3 text-white "> {currentTime} </div>
           <div
             className="w-1/2 p-0.5"
             onMouseEnter={() => setIsTimelineHover(true)}
