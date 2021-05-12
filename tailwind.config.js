@@ -18,15 +18,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [
-    plugin(function ({ addUtilities }) {
-      const newUtilities = {
-        '::-webkit-scrollbar-track': {
-          backgroundColor: '#000',
-        },
-      };
-
-      addUtilities(newUtilities);
-    }),
-  ],
+  plugins: [],
 };

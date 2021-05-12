@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Playlist } from '../../objects/Object';
+import { Collection } from '../../objects/Object';
+import DefaultImage from '../../../assets/images/default.png';
 
-function PlayListCard({ playlist }: { playlist: Playlist }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
+function CreatePlayListCard() {
   return (
-    <Link to={`/playlists/${playlist.name}`}>
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="shadow-md focus:outline-none bg-gradient-to-t from-primary via-primary2 to-primary3 w-44 h-52 rounded-md hover:to-secondary2 hover:from-secondary2 hover:via-secondary2"
+    >
+      <p className="text-6xl font-bold text-white">+</p>
+    </motion.button>
+  );
+}
+
+function PlayListCard({ collection }: { collection: Collection }) {
+  return (
+    <Link to={`/playlists/${collection.name}`}>
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="shadow-md focus:outline-none bg-gradient-to-t from-primary via-primary2 to-primary3 w-44 h-48 rounded-2xl hover:to-secondary2 hover:from-secondary2 hover:via-secondary2"
+        className="shadow-md focus:outline-none bg-gradient-to-t from-primary via-primary2 to-primary3 w-44 h-52 rounded-md hover:to-secondary2 hover:from-secondary2 hover:via-secondary2"
       >
         <div id="content" className="p-2 h-full w-full">
-          <p className="text-2xl overflow-ellipsis overflow-hidden text-white">
-            {playlist.name}
+          <img
+            src={DefaultImage}
+            alt={DefaultImage}
+            className="rounded-md w-full h-3/4"
+          />
+          <p className="text-xl truncate h-1/4 w-full text-white pt-3">
+            {collection.name}
           </p>
         </div>
       </motion.button>
@@ -23,4 +39,4 @@ function PlayListCard({ playlist }: { playlist: Playlist }) {
   );
 }
 
-export default PlayListCard;
+export { PlayListCard, CreatePlayListCard };
