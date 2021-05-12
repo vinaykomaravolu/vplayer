@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
 import { Playlist } from '../../objects/Object';
-import PlayListCard from '../components/PlayListCard';
+import { PlayListCard, CreatePlayListCard } from '../components/PlayListCard';
 
 const PlayIcon = (
   <svg
@@ -87,7 +87,7 @@ function Playlists() {
       exit="exit"
       className="section-page"
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-auto">
         <div className="section-title">Playlists</div>
         <div className="flex justify-end">
           <div id="search">
@@ -101,11 +101,14 @@ function Playlists() {
           </div>
         </div>
         <div className="flex flex-row flex-wrap ">
+          <div className="p-2">
+            <CreatePlayListCard />
+          </div>
           {playlists.map((playlist, i) => {
             return (
               // eslint-disable-next-line react/no-array-index-key
               <div className="p-2" key={i}>
-                <PlayListCard playlist={playlist} />
+                <PlayListCard collection={playlist} />
               </div>
             );
           })}

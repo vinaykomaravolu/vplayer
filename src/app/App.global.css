@@ -15,10 +15,10 @@ nav {
   }
 
   .section-title {
-    @apply text-3xl font-bold p-2 text-secondary;
+    @apply text-3xl font-bold p-2 text-secondary truncate;
   }
 
   .section-subtitle {
-    @apply text-xl font-bold p-2 text-white;
+    @apply text-xl font-bold p-2 text-white truncate;
   }
 }

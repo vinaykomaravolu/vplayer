@@ -4,6 +4,17 @@ import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';
 
+const MoreIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-5"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+  </svg>
+);
+
 function MusicTable({ data }: { data: Song[] }) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
@@ -50,35 +61,6 @@ function MusicTable({ data }: { data: Song[] }) {
           whileTap={{ scale: 0.95 }}
           key="title"
           onClick={() => {
-            if (sortBy === 'artists') {
-              setSortAsc(!sortAsc);
-            } else {
-              setSortAsc(true);
-            }
-            setSortBy('artists');
-          }}
-        >
-          <div className="flex flex-row items-center">
-            ARTISTS
-            {sortBy === 'artists' ? (
-              sortAsc ? (
-                <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleUp />{' '}
-                </div>
-              ) : (
-                <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleDown />{' '}
-                </div>
-              )
-            ) : null}
-          </div>
-        </motion.button>
-        <motion.button
-          className="focus:outline-none col-span-3 text-left"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          key="title"
-          onClick={() => {
             if (sortBy === 'album') {
               setSortAsc(!sortAsc);
             } else {
@@ -102,6 +84,36 @@ function MusicTable({ data }: { data: Song[] }) {
             ) : null}
           </div>
         </motion.button>
+        <motion.button
+          className="focus:outline-none col-span-2 text-left"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          key="title"
+          onClick={() => {
+            if (sortBy === 'artists') {
+              setSortAsc(!sortAsc);
+            } else {
+              setSortAsc(true);
+            }
+            setSortBy('artists');
+          }}
+        >
+          <div className="flex flex-row items-center">
+            ARTISTS
+            {sortBy === 'artists' ? (
+              sortAsc ? (
+                <div id="icon-sort" className="pr-1 pl-1">
+                  <GoTriangleUp />{' '}
+                </div>
+              ) : (
+                <div id="icon-sort" className="pr-1 pl-1">
+                  <GoTriangleDown />{' '}
+                </div>
+              )
+            ) : null}
+          </div>
+        </motion.button>
+
         <motion.button
           className="focus:outline-none col-span-1 text-left"
           whileHover={{ scale: 1.05 }}
@@ -199,7 +211,7 @@ function MusicTable({ data }: { data: Song[] }) {
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 id={`song-${i}`}
-                onClick={(event) => {
+                onDoubleClick={(event) => {
                   console.log(song);
                 }}
               >
@@ -207,10 +219,10 @@ function MusicTable({ data }: { data: Song[] }) {
                   {song.name}
                 </div>
                 <div className="col-span-3 flex items-center truncate mr-4">
-                  {song.artists}
-                </div>
-                <div className="col-span-3 flex items-center truncate mr-4">
                   {song.album}
+                </div>
+                <div className="col-span-2 flex items-center truncate mr-4">
+                  {song.artists}
                 </div>
 
                 <div className="col-span-1 flex items-center truncate mr-4">
@@ -218,6 +230,27 @@ function MusicTable({ data }: { data: Song[] }) {
                 </div>
                 <div className="col-span-1 flex items-center justify-end truncate mr-4">
                   {song.length}
+                </div>
+                <div className="col-span-1 flex mr-4 justify-end">
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="focus:outline-none"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      console.log('click');
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                  </motion.button>
                 </div>
               </motion.div>
             );
