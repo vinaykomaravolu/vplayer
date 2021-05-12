@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import AllMusic from './pages/AllMusic';
 import Playlists from './pages/Playlists';
 import Settings from './pages/Settings';
+import Albums from './pages/Albums';
 import Nav from './components/Nav';
 import WindowNav from './components/WindowNav';
 import './App.global.css';
@@ -126,6 +127,7 @@ export default function App() {
                     <Route path="/home" component={Home} />
                     <Route exact path="/allmusic" component={AllMusic} />
                     <Route exact path="/playlists" component={Playlists} />
+                    <Route exact path="/albums" component={Albums} />
                     <Route exact path="/settings" component={Settings} />
                     <Redirect exact path="/" to="/home" />
                   </Switch>

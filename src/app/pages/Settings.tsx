@@ -134,7 +134,7 @@ function Settings() {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-[${style.primary}] via-[${style.primary2}] via-[${style.secondary2}] to-[${style.secondary}]`}
+                className={`shadow-md mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-[${style.primary}] via-[${style.primary2}] via-[${style.secondary2}] to-[${style.secondary}]`}
                 key={style.primary + style.secondary}
               />
             );

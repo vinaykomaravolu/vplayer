@@ -130,6 +130,14 @@ function Nav() {
         isTitleEnabled={!isOpen}
       />
       <NavLink
+        data-testid="albums-link"
+        to="/albums"
+        isActive={pathname.includes('/albums')}
+        icon={PlaylistsIcon}
+        title="Albums"
+        isTitleEnabled={!isOpen}
+      />
+      <NavLink
         data-testid="playlists-link"
         to="/playlists"
         isActive={pathname.includes('/playlists')}
