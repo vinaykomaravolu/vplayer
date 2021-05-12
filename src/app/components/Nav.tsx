@@ -156,6 +156,11 @@ function Nav() {
         title="Playlists"
         isTitleEnabled={!isOpen}
       />
+      {isOpen ? null : (
+        <div className="w-full h-full p-3 ">
+          <div className="bg-primary2 rounded-md w-full h-full" />
+        </div>
+      )}
       <div className="flex flex-col h-full justify-end">
         <NavLink
           data-testid="settings-link"

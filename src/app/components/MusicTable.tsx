@@ -234,7 +234,7 @@ function MusicTable({ data }: { data: Song[] }) {
                 <div className="col-span-1 flex mr-4 justify-end">
                   <motion.button
                     type="button"
-                    whileHover={{ scale: 1.3 }}
+                    whileHover={{ scaleX: 1.3 }}
                     whileTap={{ scale: 0.9 }}
                     className="focus:outline-none"
                     onClick={(event) => {
