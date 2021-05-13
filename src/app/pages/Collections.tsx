@@ -121,7 +121,7 @@ function Collections() {
       name: id,
     };
     SetCollection(playlist);
-  }, []);
+  }, [id]);
 
   return (
     <motion.div
@@ -155,7 +155,7 @@ function Collections() {
             </svg>
           </motion.button>
         </Link>
-        <div className="flex flex-row w-full flex flex-nowrap items-center">
+        <div className="flex flex-row w-full flex-nowrap items-center">
           <img
             src={collection.image ? collection.image : DefaultImage}
             alt={DefaultImage}

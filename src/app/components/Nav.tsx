@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import PlayListMini from './PlayListsMini';
 
 function NavLink({
   to = '/',
@@ -148,17 +149,48 @@ function Nav() {
         title="Albums"
         isTitleEnabled={!isOpen}
       />
-      <NavLink
-        data-testid="playlists-link"
-        to="/playlists"
-        isActive={pathname.includes('/playlists')}
-        icon={PlaylistsIcon}
-        title="Playlists"
-        isTitleEnabled={!isOpen}
-      />
+      <div className="w-full flex flex-row relative">
+        <NavLink
+          data-testid="playlists-link"
+          to="/playlists"
+          isActive={pathname.includes('/playlists')}
+          icon={PlaylistsIcon}
+          title="Playlists"
+          isTitleEnabled={!isOpen}
+        />
+        {isOpen ? null : (
+          <div className="bg-transparent  rounded-full">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.05 }}
+              type="button"
+              className="absolute top-1 right-2 subpixel-antialiased focus:outline-none hover:text-secondary2 text-secondary "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </motion.button>
+          </div>
+        )}
+      </div>
+
       {isOpen ? null : (
-        <div className="w-full h-full p-3 ">
-          <div className="bg-primary2 rounded-md w-full h-full" />
+        <div className="w-full h-1/2 pl-5 pt-2 pb-2 flex flex-nowrap">
+          <div className="flex flex-nowrap bg-primary2 rounded-l-xl w-full h-full ">
+            <PlayListMini />
+          </div>
         </div>
       )}
       <div className="flex flex-col h-full justify-end">

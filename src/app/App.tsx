@@ -128,12 +128,8 @@ export default function App() {
                     <Route path="/home" component={Home} />
                     <Route exact path="/allmusic" component={AllMusic} />
                     <Route exact path="/playlists" component={Playlists} />
-                    <Route
-                      exact
-                      path="/playlists/:id"
-                      component={Collections}
-                    />
-                    <Route exact path="/albums/:id" component={Collections} />
+                    <Route path="/playlists/:id" component={Collections} />
+                    <Route path="/albums/:id" component={Collections} />
                     <Route exact path="/albums" component={Albums} />
                     <Route exact path="/settings" component={Settings} />
                     <Redirect exact path="/" to="/home" />
