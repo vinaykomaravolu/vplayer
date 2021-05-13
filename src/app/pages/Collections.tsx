@@ -155,13 +155,13 @@ function Collections() {
             </svg>
           </motion.button>
         </Link>
-        <div className="flex flex-row w-full flex flex-nowrap">
+        <div className="flex flex-row w-full flex flex-nowrap items-center">
           <img
             src={collection.image ? collection.image : DefaultImage}
             alt={DefaultImage}
-            className="rounded-md w-64 h-64 object-cover"
+            className="rounded-md sm:w-32 sm:h-32 md:w-64 md:h-64 object-cover"
           />
-          <div className="text-secondary truncate text-5xl font-bold flex items-center">
+          <div className="text-secondary truncate sm:text-2xl md:text-5xl font-bold  p-4">
             {collection.name}
           </div>
         </div>
