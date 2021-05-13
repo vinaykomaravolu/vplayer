@@ -115,7 +115,7 @@ function MusicTable({ data }: { data: Song[] }) {
         </motion.button>
 
         <motion.button
-          className="focus:outline-none col-span-1 text-left"
+          className="focus:outline-none col-span-1 text-left sm:invisible md:visible"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           key="title"
@@ -157,7 +157,7 @@ function MusicTable({ data }: { data: Song[] }) {
             setSortBy('length');
           }}
         >
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center ">
             LENGTH
             {sortBy === 'length' ? (
               sortAsc ? (
@@ -225,10 +225,10 @@ function MusicTable({ data }: { data: Song[] }) {
                   {song.artists}
                 </div>
 
-                <div className="col-span-1 flex items-center truncate mr-4">
+                <div className="col-span-1 flex items-center truncate md:mr-4 sm:mr-0 sm:invisible md:visible ">
                   {song.publish_year}
                 </div>
-                <div className="col-span-1 flex items-center justify-end truncate mr-4">
+                <div className="col-span-1 flex items-center truncate mr-4">
                   {song.length}
                 </div>
                 <div className="col-span-1 flex mr-4 justify-end">

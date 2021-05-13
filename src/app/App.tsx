@@ -133,6 +133,7 @@ export default function App() {
                       path="/playlists/:id"
                       component={Collections}
                     />
+                    <Route exact path="/albums/:id" component={Collections} />
                     <Route exact path="/albums" component={Albums} />
                     <Route exact path="/settings" component={Settings} />
                     <Redirect exact path="/" to="/home" />
