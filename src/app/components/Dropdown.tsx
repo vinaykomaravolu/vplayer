@@ -3,11 +3,11 @@ import { createPopper, VirtualElement } from '@popperjs/core';
 import { motion } from 'framer-motion';
 
 const Dropdown = ({
-  color,
   buttonStyle,
+  i,
 }: {
-  color: string;
   buttonStyle: JSX.Element;
+  i: number;
 }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -28,12 +28,6 @@ const Dropdown = ({
   };
 
   // bg colors
-  let bgColor: string;
-  if (color === 'white') {
-    bgColor = 'bg-blueGray-700';
-  } else {
-    bgColor = `bg-${color}-500`;
-  }
 
   const onClick = () => {
     if (dropdownPopoverShow) {
@@ -55,53 +49,51 @@ const Dropdown = ({
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full sm:w-6/12 md:w-4/12 px-4 ">
+        <div
+          className="w-full sm:w-6/12 md:w-4/12 px-4 "
+          onMouseLeave={() => {
+            setDropdownPopoverShow(false);
+          }}
+        >
           <div className="relative inline-flex align-middle w-full ">
             <motion.button
               className="focus:outline-none w-full h-full"
               whileHover={{ scaleX: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              onClick={() => {
+              onMouseOver={() => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 onClick();
               }}
             >
-              <div ref={btnDropdownRef}>
-                {dropdownPopoverShow ? 'ture' : 'false'}
-              </div>
+              <div ref={btnDropdownRef}>{buttonStyle}</div>
             </motion.button>
             <div
               ref={popoverDropdownRef}
               className={`${
-                (dropdownPopoverShow ? 'block ' : 'hidden ') +
-                (color === 'white' ? 'bg-white ' : `${bgColor} `)
-              }text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1`}
+                dropdownPopoverShow ? 'block ' : 'hidden '
+              } bg-primary3 text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1`}
               style={{ minWidth: '12rem' }}
             >
               <a
                 href="#pablo"
-                className={`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent ${
-                  color === 'white' ? ' text-blueGray-700' : 'text-white'
-                }`}
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white"
                 onClick={(e) => e.preventDefault()}
               >
-                Action
+                {i < 3 ? (
+                  <Dropdown buttonStyle={buttonStyle} i={i + 1} />
+                ) : null}
               </a>
               <a
                 href="#pablo"
-                className={`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent ${
-                  color === 'white' ? ' text-blueGray-700' : 'text-white'
-                }`}
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white"
                 onClick={(e) => e.preventDefault()}
               >
                 Another action
               </a>
               <a
                 href="#pablo"
-                className={`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent ${
-                  color === 'white' ? ' text-blueGray-700' : 'text-white'
-                }`}
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white"
                 onClick={(e) => e.preventDefault()}
               >
                 Something else here
@@ -109,9 +101,7 @@ const Dropdown = ({
               <div className="h-0 my-2 border border-solid border-t-0 border-blueGray-800 opacity-25" />
               <a
                 href="#pablo"
-                className={`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent ${
-                  color === 'white' ? ' text-blueGray-700' : 'text-white'
-                }`}
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white"
                 onClick={(e) => e.preventDefault()}
               >
                 Seprated link

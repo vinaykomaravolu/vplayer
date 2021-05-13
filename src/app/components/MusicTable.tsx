@@ -233,7 +233,7 @@ function MusicTable({ data }: { data: Song[] }) {
                   {song.length}
                 </div>
                 <div className="col-span-1 flex mr-4 justify-end">
-                  <Dropdown color="white" buttonStyle={MoreIcon} />
+                  <Dropdown i={1} buttonStyle={MoreIcon} />
                 </div>
               </motion.div>
             );
