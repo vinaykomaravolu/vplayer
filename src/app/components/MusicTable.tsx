@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';
+import Dropdown from './Dropdown';
 
 const MoreIcon = (
   <svg
@@ -232,25 +233,7 @@ function MusicTable({ data }: { data: Song[] }) {
                   {song.length}
                 </div>
                 <div className="col-span-1 flex mr-4 justify-end">
-                  <motion.button
-                    type="button"
-                    whileHover={{ scaleX: 1.3 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="focus:outline-none"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      console.log('click');
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                    </svg>
-                  </motion.button>
+                  <Dropdown color="white" buttonStyle={MoreIcon} />
                 </div>
               </motion.div>
             );
