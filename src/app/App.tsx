@@ -1,11 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import {
-  BrowserRouter,
-  Switch,
-  Redirect,
-  Route,
-  NavLink,
-} from 'react-router-dom';
+import { HashRouter, Switch, Redirect, Route, NavLink } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
 import Home from './pages/Home';
@@ -111,7 +105,7 @@ const TestC = () => {
 export default function App() {
   return (
     <Suspense fallback={<TestC />}>
-      <BrowserRouter>
+      <HashRouter>
         <div className="w-screen h-screen">
           <div className="h-full w-full flex flex-col">
             <div
@@ -142,7 +136,7 @@ export default function App() {
             </div>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </Suspense>
   );
 }

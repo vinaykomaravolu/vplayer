@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef, createRef } from 'react';
 import { createPopper, VirtualElement } from '@popperjs/core';
 import { motion } from 'framer-motion';
+import DropdownData from '../types/DropdownData';
 
 const Dropdown = ({
   buttonStyle,
-  i,
+  data,
 }: {
   buttonStyle: JSX.Element;
-  i: number;
+  data: DropdownData;
 }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -34,7 +35,15 @@ const Dropdown = ({
       return;
     }
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: 'bottom-start',
+      placement: 'left-start',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 0],
+          },
+        },
+      ],
     });
     setDropdownPopoverShow(true);
   };
@@ -66,23 +75,23 @@ const Dropdown = ({
                 onClick();
               }}
             >
-              <div ref={btnDropdownRef}>{buttonStyle}</div>
+              <div ref={btnDropdownRef}>
+                {data.type === 'root' ? buttonStyle : <div>{data.name}</div>}
+              </div>
             </motion.button>
             <div
               ref={popoverDropdownRef}
               className={`${
                 dropdownPopoverShow ? 'block ' : 'hidden '
-              } bg-primary3 text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1`}
+              } bg-primary3 text-base z-50 float-left  list-none text-left rounded shadow-lg `}
               style={{ minWidth: '12rem' }}
             >
               <a
                 href="#pablo"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-white"
+                className="text-sm py-2 font-normal block w-full whitespace-nowrap bg-transparent text-white"
                 onClick={(e) => e.preventDefault()}
               >
-                {i < 3 ? (
-                  <Dropdown buttonStyle={buttonStyle} i={i + 1} />
-                ) : null}
+                Test
               </a>
               <a
                 href="#pablo"
