@@ -1,5 +1,4 @@
-const plugin = require('tailwindcss/plugin');
-
+/* eslint-disable global-require */
 module.exports = {
   mode: 'jit',
   purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
@@ -18,5 +17,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/custom-forms')],
 };

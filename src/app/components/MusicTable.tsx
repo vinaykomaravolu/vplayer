@@ -4,6 +4,23 @@ import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';
 import Dropdown from './Dropdown';
+import DropdownData from '../types/DropdownData';
+
+const dropdowndata: DropdownData = {
+  type: 'root',
+  children: [
+    { name: 'Test 1', type: 'click' },
+    {
+      name: 'Test 2',
+      type: 'hover',
+      children: [
+        { name: 'Test 2.1', type: 'item' },
+        { name: 'Test 2.2', type: 'item' },
+      ],
+    },
+    { name: 'Test 3', type: 'item', handle: console.log('hello') },
+  ],
+};
 
 const MoreIcon = (
   <svg
@@ -16,9 +33,87 @@ const MoreIcon = (
   </svg>
 );
 
+function MusicRow({
+  data,
+  i,
+  handleSelect,
+}: {
+  data: Song;
+  i: number;
+  handleSelect: any;
+}) {
+  const [isHover, setIsHover] = useState<boolean>(false);
+
+  return (
+    <motion.div
+      className={`grid grid-cols-12
+   text-white font-normal bg-${
+     i % 2 === 0 ? 'primary' : 'primary2'
+   } h-14 hover:bg-secondary2`}
+      // eslint-disable-next-line react/no-array-index-key
+      key={i}
+      id={`song-${i}`}
+      onDoubleClick={(event) => {
+        console.log(data);
+      }}
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
+      }}
+    >
+      <div className="col-span-4 flex items-center truncate mr-4 pl-5">
+        <input
+          type="checkbox"
+          disabled={!isHover}
+          onClick={() => {
+            handleSelect();
+          }}
+          className={`cursor-pointer form-checkbox mr-2 h-7 w-7 text-secondary2 ${
+            isHover ? 'bg-primary3' : 'bg-transparent'
+          } border-secondary rounded-sm`}
+        />
+        {data.name}
+      </div>
+      <div className="col-span-3 flex items-center truncate mr-4">
+        {data.album}
+      </div>
+      <div className="col-span-2 flex items-center truncate mr-4">
+        {data.artists}
+      </div>
+
+      <div className="col-span-1 flex items-center truncate md:mr-4 sm:mr-0 sm:invisible md:visible ">
+        {data.publish_year}
+      </div>
+      <div className="col-span-1 flex items-center truncate mr-4">
+        {data.length}
+      </div>
+      <div className="col-span-1 flex mr-4 justify-end">
+        <Dropdown data={dropdowndata} buttonStyle={MoreIcon} />
+      </div>
+    </motion.div>
+  );
+}
+
 function MusicTable({ data }: { data: Song[] }) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
+  const selected: Song[] = [];
+
+  const handleSelected = (song: Song) => {
+    let found = -1;
+    for (let s = 0; s < selected.length; s += 1) {
+      if (selected[s] === song) {
+        found = s;
+      }
+    }
+    if (found > -1) {
+      selected.splice(found, 1);
+    } else {
+      selected.push(song);
+    }
+  };
 
   return (
     <div className="flex flex-col h-full divide-y divide-yellow-500  overflow-y-auto">
@@ -104,11 +199,11 @@ function MusicTable({ data }: { data: Song[] }) {
             {sortBy === 'artists' ? (
               sortAsc ? (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleUp />{' '}
+                  <GoTriangleUp />
                 </div>
               ) : (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleDown />{' '}
+                  <GoTriangleDown />
                 </div>
               )
             ) : null}
@@ -134,11 +229,11 @@ function MusicTable({ data }: { data: Song[] }) {
             {sortBy === 'publish_year' ? (
               sortAsc ? (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleUp />{' '}
+                  <GoTriangleUp />
                 </div>
               ) : (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleDown />{' '}
+                  <GoTriangleDown />
                 </div>
               )
             ) : null}
@@ -163,11 +258,11 @@ function MusicTable({ data }: { data: Song[] }) {
             {sortBy === 'length' ? (
               sortAsc ? (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleUp />{' '}
+                  <GoTriangleUp />
                 </div>
               ) : (
                 <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleDown />{' '}
+                  <GoTriangleDown />
                 </div>
               )
             ) : null}
@@ -202,42 +297,16 @@ function MusicTable({ data }: { data: Song[] }) {
 
             return 0;
           })
-          .map((song, i) => {
-            return (
-              <motion.div
-                className={`grid grid-cols-12
-              } text-white font-normal bg-${
-                i % 2 === 0 ? 'primary' : 'primary2'
-              } h-14 hover:bg-secondary2`}
-                // eslint-disable-next-line react/no-array-index-key
-                key={i}
-                id={`song-${i}`}
-                onDoubleClick={(event) => {
-                  console.log(song);
-                }}
-              >
-                <div className="col-span-4 flex items-center truncate mr-4 pl-5">
-                  {song.name}
-                </div>
-                <div className="col-span-3 flex items-center truncate mr-4">
-                  {song.album}
-                </div>
-                <div className="col-span-2 flex items-center truncate mr-4">
-                  {song.artists}
-                </div>
-
-                <div className="col-span-1 flex items-center truncate md:mr-4 sm:mr-0 sm:invisible md:visible ">
-                  {song.publish_year}
-                </div>
-                <div className="col-span-1 flex items-center truncate mr-4">
-                  {song.length}
-                </div>
-                <div className="col-span-1 flex mr-4 justify-end">
-                  <Dropdown i={1} buttonStyle={MoreIcon} />
-                </div>
-              </motion.div>
-            );
-          })}
+          .map((song, i) => (
+            <MusicRow
+              data={song}
+              key={song.name}
+              i={i}
+              handleSelect={() => {
+                handleSelected(song);
+              }}
+            />
+          ))}
       </div>
     </div>
   );
