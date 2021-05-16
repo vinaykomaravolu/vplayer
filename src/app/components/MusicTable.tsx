@@ -3,48 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';
-import Dropdown from './Dropdown';
-import DropdownData from '../types/DropdownData';
+import SongDropdown from './SongDropdown';
 
-const dropdowndata: DropdownData = {
-  type: 'root',
-  children: [
-    { name: 'Like', type: 'item' },
-    {
-      name: 'Add to playlist',
-      type: 'menu',
-      children: [
-        { name: 'Test 2.1', type: 'item' },
-        { name: 'Test 2.2', type: 'item' },
-      ],
-    },
-    {
-      name: 'Add to favorites',
-      type: 'item',
-      handle: () => {
-        console.log('hello');
-      },
-    },
-  ],
-};
-
-const MoreIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-5"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-  </svg>
-);
-
-function MusicRow({
-  data,
+function SongRow({
+  song,
   i,
   handleSelect,
 }: {
-  data: Song;
+  song: Song;
   i: number;
   handleSelect: any;
 }) {
@@ -60,7 +26,7 @@ function MusicRow({
       key={i}
       id={`song-${i}`}
       onDoubleClick={(event) => {
-        console.log(data);
+        console.log(song);
       }}
       onMouseEnter={() => {
         setIsHover(true);
@@ -80,23 +46,23 @@ function MusicRow({
             isHover ? 'bg-primary3' : 'bg-transparent'
           } border-secondary rounded-sm`}
         />
-        {data.name}
+        {song.name}
       </div>
       <div className="col-span-3 flex items-center truncate mr-4">
-        {data.album}
+        {song.album}
       </div>
       <div className="col-span-2 flex items-center truncate mr-4">
-        {data.artists}
+        {song.artists}
       </div>
 
       <div className="col-span-1 flex items-center truncate md:mr-4 sm:mr-0 sm:invisible md:visible ">
-        {data.publish_year}
+        {song.publish_year}
       </div>
       <div className="col-span-1 flex items-center truncate mr-4">
-        {data.length}
+        {song.length}
       </div>
       <div className="col-span-1 flex mr-4 justify-end">
-        <Dropdown data={dropdowndata} buttonStyle={MoreIcon} />
+        <SongDropdown song={song} />
       </div>
     </motion.div>
   );
@@ -132,7 +98,6 @@ function MusicTable({ data }: { data: Song[] }) {
           className="focus:outline-none col-span-4 text-left pl-5"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          key="title"
           onClick={() => {
             if (sortBy === 'name') {
               setSortAsc(!sortAsc);
@@ -161,7 +126,6 @@ function MusicTable({ data }: { data: Song[] }) {
           className="focus:outline-none col-span-3 text-left"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          key="title"
           onClick={() => {
             if (sortBy === 'album') {
               setSortAsc(!sortAsc);
@@ -190,7 +154,6 @@ function MusicTable({ data }: { data: Song[] }) {
           className="focus:outline-none col-span-2 text-left"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          key="title"
           onClick={() => {
             if (sortBy === 'artists') {
               setSortAsc(!sortAsc);
@@ -220,7 +183,6 @@ function MusicTable({ data }: { data: Song[] }) {
           className="focus:outline-none col-span-1 text-left sm:invisible md:visible"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          key="title"
           onClick={() => {
             if (sortBy === 'publish_year') {
               setSortAsc(!sortAsc);
@@ -249,7 +211,6 @@ function MusicTable({ data }: { data: Song[] }) {
           className="focus:outline-none col-span-1 text-right"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          key="title"
           onClick={() => {
             if (sortBy === 'length') {
               setSortAsc(!sortAsc);
@@ -304,8 +265,8 @@ function MusicTable({ data }: { data: Song[] }) {
             return 0;
           })
           .map((song, i) => (
-            <MusicRow
-              data={song}
+            <SongRow
+              song={song}
               key={song.name}
               i={i}
               handleSelect={() => {

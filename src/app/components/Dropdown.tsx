@@ -1,8 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useRef, createRef } from 'react';
 import { createPopper, VirtualElement } from '@popperjs/core';
 import { motion } from 'framer-motion';
-import { Console } from 'node:console';
+import { Console, timeStamp } from 'node:console';
+import { randomInt } from 'node:crypto';
 import DropdownData from '../types/DropdownData';
 
 const dirIcon = (
@@ -82,54 +84,52 @@ const Dropdown = ({
               : () => {}
           }
         >
-          <div className="inline-flex align-middle w-full h-full ">
+          <div className="inline-flex align-middle w-48 h-full ">
             {data.type === 'root' || data.type === 'menu' ? (
               data.type === 'root' ? (
                 <button
                   className="focus:outline-none w-full h-full"
                   type="button"
                   onClick={() => {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     if (data.type !== 'item') {
                       onClick();
                     }
                   }}
                 >
-                  <div ref={btnDropdownRef}>
+                  <div ref={btnDropdownRef} className="truncate w-full">
                     {data.name ? data.name : buttonStyle}
                   </div>
                 </button>
               ) : (
                 <button
-                  className="focus:outline-none w-full h-full hover:bg-primary2 rounded text-left pr-2 truncate"
+                  className="focus:outline-none w-full h-full hover:bg-primary2 rounded text-left truncate pr-4"
                   type="button"
                   onMouseEnter={(event) => {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     event.stopPropagation();
+                    data.handle();
                     onClick();
                   }}
                 >
                   <div ref={btnDropdownRef} className="flex flex-row w-full">
                     <div>{dirIcon}</div>
-                    <div>{data.name}</div>
+                    <div className="truncate w-full">{data.name}</div>
                   </div>
                 </button>
               )
             ) : (
               <button
-                className="focus:outline-none w-full h-full hover:bg-primary2 rounded text-left pl-5 pr-2 truncate"
+                className="focus:outline-none h-full w-full hover:bg-primary2 rounded text-left pl-5 pr-4"
                 type="button"
                 onMouseDown={
                   data.handle
                     ? () => {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                         data.handle();
                       }
                     : () => {}
                 }
               >
                 <div ref={btnDropdownRef}>
-                  <div>{data.name}</div>
+                  <div className="truncate w-full">{data.name}</div>
                 </div>
               </button>
             )}
@@ -137,19 +137,17 @@ const Dropdown = ({
               ref={popoverDropdownRef}
               className={`${
                 dropdownPopoverShow ? 'block ' : 'hidden '
-              } bg-primary3 text-base z-50 flex flex-col text-left rounded shadow-lg `}
+              } bg-primary3 text-base z-50 flex flex-col flex-nowrap text-left rounded shadow-lg `}
               style={{ minWidth: '12rem' }}
             >
-              {data.children?.map((child) => {
+              {data.children?.map((child, i) => {
                 return (
-                  <a
-                    href="#pablo"
+                  <div
                     className="text-sm font-normal h-8 w-full whitespace-nowrap bg-transparent text-white "
-                    onClick={(e) => e.preventDefault()}
-                    key={data.name}
+                    key={Math.random().toString(36)}
                   >
                     <Dropdown buttonStyle={buttonStyle} data={child} />
-                  </a>
+                  </div>
                 );
               })}
             </div>
