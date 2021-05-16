@@ -11,12 +11,31 @@ const pageVariants = {
   exit: { opacity: 0 },
 };
 
+const PlayIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-14 w-14"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fillRule="evenodd"
+      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
 function Collections() {
   const { id }: { id: string } = useParams();
   const [collection, SetCollection] = useState<Collection>({
     name: '',
     songs: [],
   });
+
+  function playCollection() {
+    console.log(`Currently playing ${collection.name}`);
+  }
 
   useEffect(() => {
     const playlist = {
@@ -139,7 +158,7 @@ function Collections() {
             type="button"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="text-secondary focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
+            className="hover:text-secondary2 text-secondary focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,10 +178,23 @@ function Collections() {
           <img
             src={collection.image ? collection.image : DefaultImage}
             alt={DefaultImage}
-            className="rounded-md sm:w-32 sm:h-32 md:w-64 md:h-64 object-cover"
+            className="rounded-md w-0 h-0 sm:w-40 sm:h-40 xl:w-52 xl:h-52 object-cover"
           />
-          <div className="text-secondary truncate sm:text-2xl md:text-5xl font-bold  p-4">
+          <div className="text-secondary truncate text-3xl sm:text-4xl xl:text-5xl font-bold  p-4">
             {collection.name}
+            <div className="flex flex-row flex-nowrap justify pt-4 pb-4">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                type="button"
+                onClick={() => {
+                  playCollection();
+                }}
+              >
+                {' '}
+                {PlayIcon}
+              </motion.button>
+            </div>
           </div>
         </div>
         <MusicTable data={collection.songs} />

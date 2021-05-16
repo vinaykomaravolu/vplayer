@@ -108,7 +108,7 @@ function Playlists() {
             return (
               // eslint-disable-next-line react/no-array-index-key
               <div className="p-2" key={i}>
-                <PlayListCard collection={playlist} />
+                <PlayListCard playlist={playlist} />
               </div>
             );
           })}
