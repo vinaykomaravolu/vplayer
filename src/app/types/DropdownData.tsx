@@ -1,7 +1,7 @@
 interface DropdownData {
   name?: string;
   handle?: any;
-  type: 'root' | 'hover' | 'click' | 'item';
+  type: 'root' | 'menu' | 'item';
   children?: DropdownData[];
 }
 

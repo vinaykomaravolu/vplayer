@@ -9,16 +9,22 @@ import DropdownData from '../types/DropdownData';
 const dropdowndata: DropdownData = {
   type: 'root',
   children: [
-    { name: 'Test 1', type: 'click' },
+    { name: 'Like', type: 'item' },
     {
-      name: 'Test 2',
-      type: 'hover',
+      name: 'Add to playlist',
+      type: 'menu',
       children: [
         { name: 'Test 2.1', type: 'item' },
         { name: 'Test 2.2', type: 'item' },
       ],
     },
-    { name: 'Test 3', type: 'item', handle: console.log('hello') },
+    {
+      name: 'Add to favorites',
+      type: 'item',
+      handle: () => {
+        console.log('hello');
+      },
+    },
   ],
 };
 
