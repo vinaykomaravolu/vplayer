@@ -185,7 +185,7 @@ function MusicPlayer() {
             <IconButton
               icon={repeatIcon}
               handleClick={() => {
-                setRepeat(true);
+                setRepeat(false);
               }}
             />
           </div>
@@ -197,7 +197,7 @@ function MusicPlayer() {
             <IconButton
               icon={repeatIconOf}
               handleClick={() => {
-                setRepeat(false);
+                setRepeat(true);
               }}
             />
           </div>
