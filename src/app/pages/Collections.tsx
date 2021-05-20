@@ -243,6 +243,7 @@ function Collections() {
                 onClick={() => {
                   setIsEditOpen(true);
                 }}
+                className="focus:outline-none"
               >
                 {EditIcon}
               </motion.button>

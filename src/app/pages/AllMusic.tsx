@@ -28,6 +28,7 @@ const pageVariants = {
 function AllMusic() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selected, setSelected] = useState<Song[]>([]);
 
   useEffect(() => {
     const songsList: Song[] = [];
@@ -83,7 +84,11 @@ function AllMusic() {
             />
           </div>
         </div>
-        <MusicTable data={songs} />
+        <MusicTable
+          selected={selected}
+          setSelected={setSelected}
+          data={songs}
+        />
       </div>
     </motion.div>
   );
