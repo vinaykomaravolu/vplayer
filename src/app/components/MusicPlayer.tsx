@@ -18,24 +18,6 @@ import {
   shuffleIconOf,
 } from './icons';
 
-const IconButton = (props: { icon: any; handleClick: () => void }) => {
-  const { icon, handleClick } = props;
-
-  return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      type="button"
-      className="section-subtitle text-secondary subpixel-antialiased focus:outline-none hover:text-secondary2"
-      onClick={() => {
-        handleClick();
-      }}
-    >
-      {icon}
-    </motion.button>
-  );
-};
-
 const progressBar = () => {
   return (
     <Slider
@@ -54,6 +36,24 @@ const progressBar = () => {
   );
 };
 
+const IconButton = (props: { icon: any; handleClick: () => void }) => {
+  const { icon, handleClick } = props;
+
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      type="button"
+      className="section-subtitle text-secondary  subpixel-antialiased focus:outline-none hover:text-secondary2"
+      onClick={() => {
+        handleClick();
+      }}
+    >
+      {icon}
+    </motion.button>
+  );
+};
+
 function MusicPlayer() {
   const [isTimelineHover, setIsTimelineHover] = useState<boolean>(false);
   const [isVolumelineHover, setVolumelineHover] = useState<boolean>(false);
@@ -64,7 +64,7 @@ function MusicPlayer() {
   const [Repeat, setRepeat] = useState<boolean>(false);
   let currentTime = 0;
   let songName = 'Song Name';
-  let songAuthor = 'Song time';
+  let songAuthor = 'Song Artist';
   let songTime = 180;
 
   function updateCurrentTime(current: number) {
@@ -103,22 +103,25 @@ function MusicPlayer() {
   }
 
   return (
-    <div className="bg-primary3 flex flex-row justify-center h-full w-full">
-      <div className="w-1/5 h-full flex flex-row">
-        <div className="h-0 w-0  md:h-28 md:w-28">
+    <div className="bg-primary3 flex flex-row justify-start h-full w-full">
+      <div className="w-36 md:w-60 h-full flex flex-row">
+        <div className="h-0 w-0  md:h-28 md:w-28 rounded-2xl">
           <img
             src={DefaultImage}
             alt={DefaultImage}
-            className="h-full w-full object-cover p-2"
+            className="h-full w-full object-cover p-2 rounded-2xl"
           />
         </div>
 
-        <div className="flex flex-col justify-end content-end overflow-hidden text-secondary">
-          <div> {songName} </div>
-          <div> {songAuthor} </div>
+        <div className="flex flex-col justify-center content-center overflow-hidden text-secondary">
+          <div className="w-32 p-2">
+            <div className="text-lg truncate">{songName}</div>
+            <div className="text-sm truncate"> {songAuthor} </div>{' '}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col w-3/5 justify-center pr-2 pl-2 ">
+
+      <div className="flex flex-col w-full justify-center pr-2 pl-2 ">
         <div className="flex flex-row justify-center content-center">
           <div
             className={`flex-nowrap content-center ${
@@ -182,7 +185,7 @@ function MusicPlayer() {
             <IconButton
               icon={repeatIcon}
               handleClick={() => {
-                setRepeat(true);
+                setRepeat(false);
               }}
             />
           </div>
@@ -194,7 +197,7 @@ function MusicPlayer() {
             <IconButton
               icon={repeatIconOf}
               handleClick={() => {
-                setRepeat(false);
+                setRepeat(true);
               }}
             />
           </div>
@@ -244,94 +247,98 @@ function MusicPlayer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-end content-start w-1/5 pr-2 pl-2">
-        <div className="flex flex-row content-center">
-          <div
-            className={`flex-nowrap content-center p-1 ${
-              Faved ? 'hidden' : 'flex'
-            } `}
-          >
-            <IconButton
-              icon={<AiOutlineHeart />}
-              handleClick={() => {
-                setFaved(true);
-              }}
-            />
-          </div>
-          <div
-            id="unfav"
-            className={`flex-nowrap content-center p-1 ${
-              Faved ? 'flex' : 'hidden'
-            }`}
-          >
-            <IconButton
-              icon={<AiFillHeart />}
-              handleClick={() => {
-                setFaved(false);
-              }}
-            />
-          </div>
+      <div className="flex flex-row justify-end content-end w-20 md:w-60 pr-2 pl-2">
+        <div className="flex flex-col justify-center content-end">
+          <div className="flex flex-row justify-end">
+            <div
+              className={`flex-nowrap content-center p-1 ${
+                Faved ? 'hidden' : 'flex'
+              } `}
+            >
+              <IconButton
+                icon={<AiOutlineHeart />}
+                handleClick={() => {
+                  setFaved(true);
+                }}
+              />
+            </div>
+            <div
+              id="unfav"
+              className={`flex-nowrap content-center p-1 ${
+                Faved ? 'flex' : 'hidden'
+              }`}
+            >
+              <IconButton
+                icon={<AiFillHeart />}
+                handleClick={() => {
+                  setFaved(false);
+                }}
+              />
+            </div>
 
-          <div
-            className={`flex-nowrap content-center p-1 ${
-              isVolOn ? 'flex' : 'hidden'
-            } `}
-          >
-            <IconButton
-              icon={volOn}
-              handleClick={() => {
-                setIsVolOn(false);
-              }}
-            />
-          </div>
+            <div className="hidden md:flex">
+              <div
+                className={`flex-nowrap content-center p-1 ${
+                  isVolOn ? 'flex' : 'hidden'
+                } `}
+              >
+                <IconButton
+                  icon={volOn}
+                  handleClick={() => {
+                    setIsVolOn(false);
+                  }}
+                />
+              </div>
 
-          <div
-            className={`flex-nowrap content-center p-1 ${
-              isVolOn ? 'hidden' : 'flex'
-            } `}
-          >
-            <IconButton
-              icon={volOf}
-              handleClick={() => {
-                setIsVolOn(true);
-              }}
-            />
-          </div>
+              <div
+                className={`flex-nowrap content-center p-1 ${
+                  isVolOn ? 'hidden' : 'flex'
+                } `}
+              >
+                <IconButton
+                  icon={volOf}
+                  handleClick={() => {
+                    setIsVolOn(true);
+                  }}
+                />
+              </div>
 
-          <div
-            className="w-1/2 p-0.5 pt-4"
-            onMouseEnter={() => setVolumelineHover(true)}
-            onMouseLeave={() => setVolumelineHover(false)}
-          >
-            <Slider
-              style={{ width: '100%' }}
-              reverse={false}
-              min={0 /** Change this */}
-              max={100 /** Change this */}
-              step={1 /** Change this */}
-              trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
-              handleStyle={
-                isVolumelineHover
-                  ? {
-                      borderColor: '#FFD700',
-                      height: 16,
-                      width: 16,
-                      backgroundColor: '#151A21',
-                    }
-                  : {
-                      borderColor: '#FFD700',
-                      height: 6,
-                      width: 0,
-                      marginTop: 0,
-                      backgroundColor: '#FFD700',
-                    }
-              }
-              railStyle={{
-                backgroundColor: '#F2AA4C',
-                height: 6,
-                opacity: 0.5,
-              }}
-            />
+              <div
+                className="w-32 p-0.5 pt-4"
+                onMouseEnter={() => setVolumelineHover(true)}
+                onMouseLeave={() => setVolumelineHover(false)}
+              >
+                <Slider
+                  style={{ width: '100%' }}
+                  reverse={false}
+                  min={0 /** Change this */}
+                  max={100 /** Change this */}
+                  step={1 /** Change this */}
+                  trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
+                  handleStyle={
+                    isVolumelineHover
+                      ? {
+                          borderColor: '#FFD700',
+                          height: 16,
+                          width: 16,
+                          backgroundColor: '#151A21',
+                        }
+                      : {
+                          borderColor: '#FFD700',
+                          height: 6,
+                          width: 0,
+                          marginTop: 0,
+                          backgroundColor: '#FFD700',
+                        }
+                  }
+                  railStyle={{
+                    backgroundColor: '#F2AA4C',
+                    height: 6,
+                    opacity: 0.5,
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
