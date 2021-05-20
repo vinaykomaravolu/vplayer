@@ -38,7 +38,6 @@ function SongRow({
       <div className="col-span-4 flex items-center truncate mr-4 pl-5">
         <input
           type="checkbox"
-          disabled={!isHover}
           onClick={() => {
             handleSelect();
           }}
@@ -68,23 +67,32 @@ function SongRow({
   );
 }
 
-function MusicTable({ data }: { data: Song[] }) {
+function MusicTable({
+  data,
+  selected,
+  setSelected,
+}: {
+  data: Song[];
+  selected: Song[];
+  setSelected: React.Dispatch<React.SetStateAction<Song[]>>;
+}) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
-  const selected: Song[] = [];
 
   const handleSelected = (song: Song) => {
+    const sel: Song[] = [...selected];
     let found = -1;
-    for (let s = 0; s < selected.length; s += 1) {
-      if (selected[s] === song) {
+    for (let s = 0; s < sel.length; s += 1) {
+      if (sel[s] === song) {
         found = s;
       }
     }
     if (found > -1) {
-      selected.splice(found, 1);
+      sel.splice(found, 1);
     } else {
-      selected.push(song);
+      sel.push(song);
     }
+    setSelected(sel);
   };
 
   return (

@@ -84,11 +84,11 @@ const Dropdown = ({
               : () => {}
           }
         >
-          <div className="inline-flex align-middle w-48 h-full ">
+          <div className="inline-flex align-middle w-full h-full ">
             {data.type === 'root' || data.type === 'menu' ? (
               data.type === 'root' ? (
                 <button
-                  className="focus:outline-none w-full h-full"
+                  className="focus:outline-none w-48 h-full shadow-none"
                   type="button"
                   onClick={() => {
                     if (data.type !== 'item') {
@@ -102,7 +102,7 @@ const Dropdown = ({
                 </button>
               ) : (
                 <button
-                  className="focus:outline-none w-full h-full hover:bg-primary2 rounded text-left truncate pr-4"
+                  className="focus:outline-none w-48 h-full hover:bg-primary2 rounded text-left truncate pr-4"
                   type="button"
                   onMouseEnter={(event) => {
                     event.stopPropagation();
@@ -118,7 +118,7 @@ const Dropdown = ({
               )
             ) : (
               <button
-                className="focus:outline-none h-full w-full hover:bg-primary2 rounded text-left pl-5 pr-4"
+                className="focus:outline-none h-full w-48 hover:bg-primary2 rounded text-left pl-5 pr-4"
                 type="button"
                 onMouseDown={
                   data.handle
@@ -129,7 +129,7 @@ const Dropdown = ({
                 }
               >
                 <div ref={btnDropdownRef}>
-                  <div className="truncate w-full">{data.name}</div>
+                  <div className="truncate  w-full">{data.name}</div>
                 </div>
               </button>
             )}
