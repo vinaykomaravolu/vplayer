@@ -61,7 +61,7 @@ function SongRow({
         {song.length}
       </div>
       <div className="col-span-1 flex mr-4 justify-end">
-        {isHover ? <SongDropdown song={song} /> : null}
+        <SongDropdown song={song} />
       </div>
     </motion.div>
   );
