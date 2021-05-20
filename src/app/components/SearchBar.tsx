@@ -61,13 +61,13 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-10 bg-red-500">
       <input
         ref={node}
         type="text"
         className={`h-10  ${
           searchIsOpen ? 'opacity-0 w-0' : 'opacity-100 w-64 '
-        } pl-12 pr-9  rounded-full z-0  transition-width transition-slowest ease duration-300 ease-in-out  focus:shadow focus:outline-none bg-primary2 text-white`}
+        } pl-12 pr-9 text-base rounded-full z-0  transition-width transition-slowest ease duration-300 ease-in-out  focus:shadow focus:outline-none bg-primary2 text-white`}
         placeholder="Search Music"
         disabled={searchIsOpen}
         onChange={(event) => {
@@ -82,7 +82,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
         onClick={() => {
           setSearchIsOpen(!searchIsOpen);
         }}
-        className={`focus:outline-none absolute top-1 left-2 text-secondary  ${
+        className={`focus:outline-none bg-blue-300 absolute top-1 left-2 text-secondary  ${
           searchIsOpen ? 'hover:text-secondary2 ' : 'pointer-events-none'
         }`}
       >

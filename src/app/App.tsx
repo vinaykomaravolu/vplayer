@@ -104,7 +104,7 @@ const TestC = () => {
 
 export default function App() {
   return (
-    <Suspense fallback={<TestC />}>
+    <Suspense fallback={<TestC />} id="app-root">
       <HashRouter>
         <div className="w-screen h-screen">
           <div className="h-full w-full flex flex-col">
