@@ -16,6 +16,7 @@ import log from 'electron-log';
 import * as fs from 'fs';
 
 const path = require('path');
+const url = require('url');
 
 export default class AppUpdater {
   constructor() {
@@ -82,7 +83,14 @@ const createWindow = async () => {
     frame: false,
   });
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      slashes: true,
+    })
+  );
+  console.log(__dirname);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -103,9 +111,9 @@ const createWindow = async () => {
   });
 
   // Open urls in the user's browser
-  mainWindow.webContents.on('new-window', (event, url) => {
+  mainWindow.webContents.on('new-window', (event, urls) => {
     event.preventDefault();
-    shell.openExternal(url);
+    shell.openExternal(urls);
   });
 
   // Remove this if your app does not use auto updates
