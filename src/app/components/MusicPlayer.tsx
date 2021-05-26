@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!rc-slider/assets/index.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'rc-slider';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { motion } from 'framer-motion';
+import { Howl, Howler } from 'howler';
 import DefaultImage from '../../../assets/images/default.png';
 import {
   volOn,
@@ -17,6 +18,9 @@ import {
   shuffleIcon,
   shuffleIconOf,
 } from './icons';
+import { Song } from '../../objects/Object';
+
+const { ipcRenderer } = require('electron');
 
 const progressBar = () => {
   return (
@@ -66,6 +70,28 @@ function MusicPlayer() {
   let songName = 'Song Name';
   let songAuthor = 'Song Artist';
   let songTime = 180;
+  const [song, setSong] = useState<Song>(Object);
+  const [songHowlObject, setSongHowlObject] = useState<Howl>(Object);
+  const [songInit, setSongInit] = useState<boolean>(false);
+  useEffect(() => {
+    ipcRenderer.on('app-player-load-song', (event: any, arg: Song) => {
+      console.log(`App song loaded: ${arg.name}`);
+      if (songInit) {
+        songHowlObject.pause();
+        songHowlObject.unload();
+      }
+      setSongInit(true);
+      setSongHowlObject(
+        new Howl({
+          src: [arg.path[0]],
+        })
+      );
+      setSong(arg);
+    });
+    return () => {
+      ipcRenderer.removeAllListeners('app-player-load-song');
+    };
+  }, [songHowlObject]);
 
   function updateCurrentTime(current: number) {
     currentTime = current;
@@ -159,6 +185,8 @@ function MusicPlayer() {
               icon={PlayIcon}
               handleClick={() => {
                 setPlaying(true);
+                ipcRenderer.send('player-play');
+                songHowlObject.play();
               }}
             />
           </div>
@@ -171,6 +199,8 @@ function MusicPlayer() {
               icon={PauseIcon}
               handleClick={() => {
                 setPlaying(false);
+                ipcRenderer.send('player-pause');
+                songHowlObject.pause();
               }}
             />
           </div>
@@ -218,6 +248,7 @@ function MusicPlayer() {
               max={songTime /** Change this */}
               step={1 /** Change this */}
               trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
+              value={10}
               handleStyle={
                 isTimelineHover
                   ? {

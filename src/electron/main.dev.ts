@@ -14,6 +14,7 @@ import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import * as fs from 'fs';
+import { Song } from '../objects/Object';
 
 const path = require('path');
 const url = require('url');
@@ -157,6 +158,24 @@ ipcMain.on('asynchronous-message', (event: any, arg: any) => {
     });
     event.reply('asynchronous-reply', fileNames);
   });
+});
+
+const { Howl, Howler } = require('howler');
+
+ipcMain.on('player-play', (event: any, arg: any) => {
+  console.log('Play');
+});
+
+ipcMain.on('player-pause', (event: any, arg: any) => {
+  console.log('Pause');
+});
+
+ipcMain.on('player-load-song', (event: any, arg: Song) => {
+  if (!arg) {
+    return;
+  }
+  console.log(`Song Loaded: ${arg.name}`);
+  event.reply('app-player-load-song', arg);
 });
 
 ipcMain.on('synchronous-message', (event: any, arg: any) => {
