@@ -55,7 +55,7 @@ const DeleteIcon = (
   </svg>
 );
 
-function Collections() {
+function AlbumCollection() {
   const { id }: { id: string } = useParams();
   const [collection, SetCollection] = useState<Collection>({
     name: '',
@@ -69,100 +69,9 @@ function Collections() {
     console.log(`Currently playing ${collection.name}`);
   }
 
-  function checkforAlbum(object: any): object is Album {
-    return 'artists' in object;
-  }
-
-  function returnPath() {
-    if (checkforAlbum(collection)) {
-      return '/Albums';
-    }
-    return '/Playlists';
-  }
-
   useEffect(() => {
     const playlist = {
       songs: [
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
         {
           name: Math.random().toString(36).substring(7),
           artists: ['Takafumi Imamura', 'Takafumi Imamura'],
@@ -195,7 +104,7 @@ function Collections() {
       className="section-page"
     >
       <div className="flex flex-col">
-        <Link to={returnPath()} className="w-8 h-8">
+        <Link to="/Playlists" className="w-8 h-8">
           <motion.button
             id="back"
             type="button"
@@ -298,4 +207,4 @@ function Collections() {
   );
 }
 
-export default Collections;
+export default AlbumCollection;
