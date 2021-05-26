@@ -12,6 +12,7 @@ import Nav from './components/Nav';
 import WindowNav from './components/WindowNav';
 import './App.global.css';
 import MusicPlayer from './components/MusicPlayer';
+import AlbumCollection from './pages/AlbumCollection';
 
 const { ipcRenderer } = require('electron');
 
@@ -123,7 +124,7 @@ export default function App() {
                     <Route exact path="/allmusic" component={AllMusic} />
                     <Route exact path="/playlists" component={Playlists} />
                     <Route path="/playlists/:id" component={Collections} />
-                    <Route path="/albums/:id" component={Collections} />
+                    <Route path="/albums/:id" component={AlbumCollection} />
                     <Route exact path="/albums" component={Albums} />
                     <Route exact path="/settings" component={Settings} />
                     <Redirect exact path="/" to="/home" />
