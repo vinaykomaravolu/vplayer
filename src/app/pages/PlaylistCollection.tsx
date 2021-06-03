@@ -380,7 +380,7 @@ function PlaylistCollection() {
             </div>
           </div>
         </div>
-        <PlaylistTable
+        <MusicTable
           data={collection.songs}
           selected={selected}
           setSelected={setSelected}
