@@ -187,8 +187,8 @@ function Nav() {
       </div>
 
       {isOpen ? null : (
-        <div className="w-full h-1/2 pl-5 pt-2 pb-2 flex flex-nowrap">
-          <div className="flex flex-nowrap bg-primary2 rounded-l-xl w-full h-full ">
+        <div className="w-full h-1/2 p-2 flex flex-nowrap">
+          <div className="flex flex-nowrap bg-primary2 rounded-md w-full h-full ">
             <PlayListMini />
           </div>
         </div>

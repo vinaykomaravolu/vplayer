@@ -7,7 +7,7 @@ import AllMusic from './pages/AllMusic';
 import Playlists from './pages/Playlists';
 import Settings from './pages/Settings';
 import Albums from './pages/Albums';
-import Collections from './pages/Collections';
+import PlaylistCollection from './pages/PlaylistCollection';
 import Nav from './components/Nav';
 import WindowNav from './components/WindowNav';
 import './App.global.css';
@@ -105,9 +105,9 @@ const TestC = () => {
 
 export default function App() {
   return (
-    <Suspense fallback={<TestC />} id="app-root">
+    <Suspense fallback={<TestC />}>
       <HashRouter>
-        <div className="w-screen h-screen">
+        <div className="w-screen h-screen" id="app-root">
           <div className="h-full w-full flex flex-col">
             <div
               data-testid="app"
@@ -123,7 +123,10 @@ export default function App() {
                     <Route path="/home" component={Home} />
                     <Route exact path="/allmusic" component={AllMusic} />
                     <Route exact path="/playlists" component={Playlists} />
-                    <Route path="/playlists/:id" component={Collections} />
+                    <Route
+                      path="/playlists/:id"
+                      component={PlaylistCollection}
+                    />
                     <Route path="/albums/:id" component={AlbumCollection} />
                     <Route exact path="/albums" component={Albums} />
                     <Route exact path="/settings" component={Settings} />

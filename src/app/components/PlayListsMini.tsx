@@ -64,7 +64,7 @@ function PlayListsMini() {
             <Link key={playlist.name} to={`/playlists/${playlist.name}`}>
               <button
                 type="button"
-                className="pr-2 pl-2 pt-1 w-full pb-1 focus:outline-none truncate text-sm text-white hover:bg-secondary2 rounded-md"
+                className="p-2 w-full focus:outline-none truncate text-sm text-white hover:bg-secondary2 rounded-md"
               >
                 {playlist.name}
               </button>

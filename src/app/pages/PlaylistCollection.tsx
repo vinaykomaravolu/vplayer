@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { Album, Collection, Playlist, Song } from '../../objects/Object';
 import MusicTable from '../components/MusicTable';
 import DefaultImage from '../../../assets/images/default.png';
-import EditPlaylistModal from '../components/EditPlaylistModal';
+import AddToPlaylist from '../components/AddToPlaylist';
 import SearchBar from '../components/SearchBar';
 import Playlists from './Playlists';
+import PlaylistTable from '../components/PlaylistTable';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -17,7 +19,7 @@ const pageVariants = {
 const EditIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-10 w-10"
+    className="h-12 w-12"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -89,7 +91,7 @@ const heart = (
   </svg>
 );
 
-function AlbumCollection() {
+function PlaylistCollection() {
   const { id }: { id: string } = useParams();
   const [collection, SetCollection] = useState<Collection>({
     name: '',
@@ -98,9 +100,32 @@ function AlbumCollection() {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selected, setSelected] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [playlistName, setPlaylistName] = useState<string>('');
+  const [playlistImage, setPlaylistImage] = useState<string | undefined>(
+    undefined
+  );
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   function playCollection() {
     console.log(`Currently playing ${collection.name}`);
+  }
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === 'Enter') {
+      console.log('do validate');
+    }
+  };
+
+  function uploadImage() {
+    <input
+      type="file"
+      className="w-full h-full"
+      onChange={(event) => {
+        if (event.target.files) {
+          collection.image = event.target.files[0].path;
+        }
+      }}
+    />;
   }
 
   useEffect(() => {
@@ -124,8 +149,11 @@ function AlbumCollection() {
         },
       ],
       name: id,
+      image: '',
     };
     SetCollection(playlist);
+    setPlaylistImage(playlist.image);
+    setPlaylistName(playlist.name);
   }, [id]);
 
   return (
@@ -138,13 +166,13 @@ function AlbumCollection() {
       className="section-page"
     >
       <div className="flex flex-col flex-nowrap">
-        <Link to="/Albums" className="w-auto h-auto pb-2">
+        <Link to="/Playlists" className="w-8 h-8 rounded-full pb-2 ">
           <motion.button
             id="back"
             type="button"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="hover:text-secondary2 w-8 text-secondary  focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
+            className="hover:text-secondary2 w-8 h-8 text-secondary  focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -162,19 +190,45 @@ function AlbumCollection() {
         </Link>
 
         <div className="flex flex-row w-full flex-nowrap items-center">
-          <button type="button" className="flex-shrink-0 relative mb-4">
+          <AddToPlaylist
+            modelIsOpen={isEditOpen}
+            setModelIsOpen={setIsEditOpen}
+          />
+
+          <div className="flex-shrink-0 relative mb-4 cursor-pointer">
             <img
-              src={collection.image ? collection.image : DefaultImage}
+              src={playlistImage || DefaultImage}
               alt={DefaultImage}
-              className="rounded-md w-0 h-0 sm:w-44 sm:h-44 xl:w-56 xl:h-56 object-cover"
+              className="rounded-md w-0 h-0 sm:w-44 sm:h-44 xl:w-64 xl:h-64 object-cover"
             />
-          </button>
+            <div className="flex absolute bg-white top-0 bottom-0 left-0 right-0 opacity-0 rounded-md text-opacity-0">
+              <input
+                type="file"
+                className="w-full h-full"
+                onChange={(event) => {
+                  if (event.target.files && event.target.files.length === 1) {
+                    console.log(event.target.files);
+                    setPlaylistImage(event.target.files[0].path);
+                  }
+                }}
+              />
+            </div>
+          </div>
 
           <div className="text-secondary truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full">
             <div className="w-full text-white truncate text-lg font-bold ">
-              Album
+              Playlist
             </div>
-            {collection.name}
+
+            <div className="flex flex-row w-full ">
+              <input
+                type="text"
+                name="playlistname"
+                defaultValue={playlistName}
+                className="overflow-hidden truncate w-full bg-transparent"
+                onChange={(e) => setPlaylistName(e.target.value)}
+              />
+            </div>
             <div>
               <div className="flex flex-row w-full pt-4 pb-4 justify-between flex-nowrap ">
                 <div className="flex flex-row flex-nowrap content-center items-center p-0">
@@ -243,6 +297,7 @@ function AlbumCollection() {
                           selected.forEach((song) => {
                             console.log(`Deleted ${song.name}`);
                           });
+                          setIsEditOpen(true);
                         }}
                         className="focus:outline-none"
                       >
@@ -262,12 +317,53 @@ function AlbumCollection() {
                           selected.forEach((song) => {
                             console.log(`Deleted ${song.name}`);
                           });
+                          setIsEditOpen(true);
                         }}
                         className="focus:outline-none"
                       >
                         <div className="flex flex-nowrap text-xl pl-2 pr-2">
                           {AddIcon}
                           Add to Playlist
+                        </div>
+                      </motion.button>
+                    </div>
+                  )}
+
+                  {selected.length > 0 ? (
+                    <div className="w-full flex flex-nowrap flex-row-reverse">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="button"
+                        onClick={() => {
+                          selected.forEach((song) => {
+                            console.log(`Deleted ${song.name}`);
+                          });
+                        }}
+                        className="focus:outline-none"
+                      >
+                        <div className="flex flex-nowrap text-xl pl-2 pr-2">
+                          <div className="pr-1"> {DeleteIcon} </div>
+                          Delete
+                        </div>
+                      </motion.button>
+                    </div>
+                  ) : (
+                    <div className="w-full flex flex-nowrap flex-row-reverse invisible">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="button"
+                        onClick={() => {
+                          selected.forEach((song) => {
+                            console.log(`Deleted ${song.name}`);
+                          });
+                        }}
+                        className="focus:outline-none"
+                      >
+                        <div className="flex flex-nowrap text-xl pl-2 pr-2">
+                          <div className="pr-1"> {DeleteIcon} </div>
+                          Delete
                         </div>
                       </motion.button>
                     </div>
@@ -284,14 +380,14 @@ function AlbumCollection() {
             </div>
           </div>
         </div>
-        <MusicTable
-          setSelected={setSelected}
-          selected={selected}
+        <PlaylistTable
           data={collection.songs}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
     </motion.div>
   );
 }
 
-export default AlbumCollection;
+export default PlaylistCollection;
