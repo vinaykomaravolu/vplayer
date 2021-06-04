@@ -100,7 +100,6 @@ const SettingsIcon = (
 function Nav() {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   return (
     <div
       data-testid="nav"
@@ -128,7 +127,7 @@ function Nav() {
       <NavLink
         data-testid="home-link"
         to="/home"
-        isActive={pathname.includes('/home')}
+        isActive={pathname.toLowerCase().includes('/home')}
         icon={HomeIcon}
         title="Home"
         isTitleEnabled={!isOpen}
@@ -136,7 +135,7 @@ function Nav() {
       <NavLink
         data-testid="allmusic-link"
         to="/allmusic"
-        isActive={pathname.includes('/allmusic')}
+        isActive={pathname.toLowerCase().includes('/allmusic')}
         icon={AllMusicIcon}
         title="Music"
         isTitleEnabled={!isOpen}
@@ -144,7 +143,7 @@ function Nav() {
       <NavLink
         data-testid="albums-link"
         to="/albums"
-        isActive={pathname.includes('/albums')}
+        isActive={pathname.toLowerCase().includes('/albums')}
         icon={AlbumsIcon}
         title="Albums"
         isTitleEnabled={!isOpen}
@@ -153,7 +152,7 @@ function Nav() {
         <NavLink
           data-testid="playlists-link"
           to="/playlists"
-          isActive={pathname.includes('/playlists')}
+          isActive={pathname.toLowerCase().includes('/playlists')}
           icon={PlaylistsIcon}
           title="Playlists"
           isTitleEnabled={!isOpen}
@@ -197,7 +196,7 @@ function Nav() {
         <NavLink
           data-testid="settings-link"
           to="/settings"
-          isActive={pathname.includes('/settings')}
+          isActive={pathname.toLowerCase().includes('/settings')}
           icon={SettingsIcon}
           title="Settings"
           isTitleEnabled={!isOpen}

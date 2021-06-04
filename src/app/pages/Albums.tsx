@@ -31,7 +31,10 @@ function Albums() {
         console.log(songlist[i].album);
         albums.push({
           name: songlist[i].album,
-          artists: [],
+          artists: [
+            'vinay Komaravolu asd asdsa sadsa dsad sadsad',
+            'Jack asdasdasdsadsadas',
+          ],
           songs: [songlist[i]],
         });
       }
@@ -76,9 +79,6 @@ function Albums() {
           </div>
         </div>
         <div className="flex flex-row flex-wrap ">
-          <div className="p-2">
-            <CreateAlbumCard />
-          </div>
           {albums.map((albumlist, i) => {
             return (
               // eslint-disable-next-line react/no-array-index-key

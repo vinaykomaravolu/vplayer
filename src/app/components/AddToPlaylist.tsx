@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { motion } from 'framer-motion';
-import { Playlist } from '../../objects/Object';
+import { Playlist, Song } from '../../objects/Object';
 import DefaultImage from '../../../assets/images/default.png';
 import { CreatePlayListCard, PlayListCard } from './PlayListCard';
 import MusicTable from './MusicTable';
+import PlaylistTable from './PlaylistTable';
 
-const styles = {
+const styles: any = {
   content: {
     top: '50%',
     left: '50%',
@@ -16,6 +17,7 @@ const styles = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#242C37',
     borderColor: '#242C37',
+    position: 'absolute',
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -25,7 +27,7 @@ const styles = {
 const ExitIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="h-8 w-8"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -86,13 +88,15 @@ function PlaylistRow({
 function AddToPlaylist({
   modelIsOpen,
   setModelIsOpen,
+  songsToAdd,
 }: {
   modelIsOpen: boolean;
   setModelIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  songsToAdd: Song[];
 }) {
   let subtitle: any;
-  let playlists: Playlist[];
-  const [playlist, setPlaylist] = useState<Playlist>();
+  const [playlist, setPlaylist] = useState<Playlist[]>([]);
+  const [selected, setSelected] = useState<Playlist[]>([]);
 
   function updatePlaylist() {
     return 0;
@@ -104,29 +108,27 @@ function AddToPlaylist({
   }
 
   useEffect(() => {
-    const Song = {
-      songs: [
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-          length: 200,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse'],
-          album: Math.random().toString(36).substring(7),
-        },
-      ],
-      name: Math.random().toString(36).substring(7),
-      image: '',
-    };
-  });
+    const PLs: Playlist[] = [];
+
+    for (let i = 0; i < 100; i += 1) {
+      PLs.push({
+        songs: [],
+        name:
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36) +
+          Math.random().toString(36),
+        image: '',
+      });
+    }
+    setPlaylist(PLs);
+  }, []);
 
   return (
     <div>
@@ -138,16 +140,16 @@ function AddToPlaylist({
           setModelIsOpen(false);
         }}
         style={styles}
-        contentLabel="Example Modal"
+        contentLabel="Add to playlist"
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col w-96 h-96">
           <div className="flex flex-row justify-between">
-            <div className="text-white truncate text-2xl font-bold pb-2">
-              Edit Playlist
+            <div className="text-secondary truncate text-2xl font-bold pb-4">
+              Add to Playlist
             </div>
             <button
               type="button"
-              className="text-white truncate text-lg font-bold "
+              className="text-secondary truncate text-lg font-bold "
               onClick={() => {
                 setModelIsOpen(false);
               }}
@@ -155,21 +157,12 @@ function AddToPlaylist({
               {ExitIcon}
             </button>
           </div>
-          <div className="flex-shrink-0 relative focus:outline-none ">
-            <div className="h-100 w-100 bg-black">
-              <div className="flex flex-row flex-wrap ">empty</div>
-            </div>
-          </div>
-          <div className="flex flex-row justify-end">
-            <button
-              type="button"
-              className="text-primary bg-secondary rounded-full text-xl pl-2 pr-2 pt-1 pb-1 font-bold focus:outline-none"
-              onClick={() => {
-                updatePlaylist();
-              }}
-            >
-              Save
-            </button>
+          <div className="overflow-y-auto w-full h-full">
+            <PlaylistTable
+              data={playlist}
+              selected={selected}
+              setSelected={setSelected}
+            />{' '}
           </div>
         </div>
       </Modal>
