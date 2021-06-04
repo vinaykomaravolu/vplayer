@@ -10,6 +10,23 @@ import MusicTable from './MusicTable';
 import SongDropdown from './SongDropdown';
 import Playlists from '../pages/Playlists';
 
+const AddIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-8 w-8"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+    />
+  </svg>
+);
+
 function PlaylistRow({
   playlist,
   i,
@@ -20,18 +37,19 @@ function PlaylistRow({
   handleSelect: any;
 }) {
   const [isHover, setIsHover] = useState<boolean>(false);
-
+  const [isSelected, setIsSelected] = useState<boolean>(false);
   return (
     <motion.div
-      className={`grid grid-cols-12
-   text-white font-normal bg-${
-     i % 2 === 0 ? 'primary' : 'primary2'
-   } h-14 hover:bg-secondary2`}
+      className={`cursor-pointer
+   text-white font-normal ${
+     isSelected ? 'bg-secondary2' : i % 2 === 0 ? 'bg-primary' : 'bg-primary2'
+   } h-14 hover:bg-secondary2 w-full`}
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`playlist-${i}`}
-      onDoubleClick={(event) => {
-        console.log(playlist);
+      onClick={() => {
+        setIsSelected(!isSelected);
+        // Add to playlist in backend
       }}
       onMouseEnter={() => {
         setIsHover(true);
@@ -40,17 +58,8 @@ function PlaylistRow({
         setIsHover(false);
       }}
     >
-      <div className="col-span-4 flex items-center truncate mr-4 pl-5">
-        <input
-          type="checkbox"
-          onClick={() => {
-            handleSelect();
-          }}
-          className={`cursor-pointer form-checkbox mr-2 h-7 w-7 text-secondary2 ${
-            isHover ? 'bg-primary3' : 'bg-transparent'
-          } border-secondary rounded-sm`}
-        />
-        {playlist.name}
+      <div className="flex items-center  w-full h-full">
+        <div className="truncate pl-5 pr-5"> {playlist.name}</div>
       </div>
     </motion.div>
   );
@@ -61,9 +70,9 @@ function PlaylistTable({
   selected,
   setSelected,
 }: {
-  data: Song[];
-  selected: Song[];
-  setSelected: React.Dispatch<React.SetStateAction<Song[]>>;
+  data: Playlist[];
+  selected: Playlist[];
+  setSelected: React.Dispatch<React.SetStateAction<Playlist[]>>;
 }) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
@@ -86,53 +95,34 @@ function PlaylistTable({
   };
 
   useEffect(() => {
-    const playlist: Playlist[] = [];
-    for (let i = 0; i < 10; i += 1) {
-      playlist.push({
+    const PLs: Playlist[] = [
+      {
         songs: [],
         name: Math.random().toString(36).substring(7),
-      });
-    }
-    setPL(playlist);
-  });
+        image: '',
+      },
+      {
+        songs: [],
+        name: Math.random().toString(36).substring(7),
+        image: '',
+      },
+      {
+        songs: [],
+        name: Math.random().toString(36).substring(7),
+        image: '',
+      },
+      {
+        songs: [],
+        name: Math.random().toString(36).substring(7),
+        image: '',
+      },
+    ];
+    setPL(PLs);
+  }, []);
 
   return (
-    <div className="flex flex-col h-full divide-y divide-yellow-500  overflow-y-auto">
-      <div
-        id="headers"
-        className={`grid grid-cols-12
-        } text-secondary font-medium pr-5`}
-      >
-        <motion.button
-          className="focus:outline-none col-span-4 text-left pl-5"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => {
-            if (sortBy === 'name') {
-              setSortAsc(!sortAsc);
-            } else {
-              setSortAsc(true);
-            }
-            setSortBy('name');
-          }}
-        >
-          <div className="flex flex-row items-center">
-            TITLE
-            {sortBy === 'name' ? (
-              sortAsc ? (
-                <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleUp />{' '}
-                </div>
-              ) : (
-                <div id="icon-sort" className="pr-1 pl-1">
-                  <GoTriangleDown />{' '}
-                </div>
-              )
-            ) : null}
-          </div>
-        </motion.button>
-      </div>
-      <div id="rows" className=" overflow-y-auto h-full">
+    <div className="flex flex-col h-full w-full">
+      <div id="rows" className=" overflow-y-auto h-full w-full rounded-md">
         {data
           .sort(function (a: Playlist, b: Playlist) {
             if (sortBy === '') {
@@ -160,13 +150,13 @@ function PlaylistTable({
 
             return 0;
           })
-          .map((playlist, i) => (
+          .map((pl, i) => (
             <PlaylistRow
-              playlist={playlist}
-              key={playlist.name}
+              playlist={pl}
+              key={pl.name}
               i={i}
               handleSelect={() => {
-                handleSelected(playlist);
+                handleSelected(pl);
               }}
             />
           ))}

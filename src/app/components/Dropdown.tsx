@@ -73,7 +73,7 @@ const Dropdown = ({
   }, []);
   return (
     <>
-      <div className="flex flex-wrap w-full h-full shadow-md">
+      <div className="flex flex-wrap w-full h-full">
         <div
           className="w-full h-full"
           onMouseLeave={

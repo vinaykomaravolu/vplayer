@@ -59,16 +59,20 @@ function AlbumCard({ album }: { album: Album }) {
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative shadow-md focus:outline-none bg-gradient-to-t from-primary via-primary2 to-primary3 w-44 h-52 rounded-md hover:to-secondary2 hover:from-secondary2 hover:via-secondary2"
+          className="relative shadow-md focus:outline-none bg-gradient-to-t from-primary via-primary2 to-primary3 w-44 h-64 rounded-md hover:to-secondary2 hover:from-secondary2 hover:via-secondary2"
         >
           <div id="content" className="p-2 h-full w-full">
             <img
               src={DefaultImage}
               alt={DefaultImage}
-              className="rounded-md w-full h-3/4"
+              className="rounded-md w-full h-36"
             />
-            <p className="text-xl truncate h-1/4 w-full text-white pt-3">
+            <p className="text-2xl truncate w-full text-white pt-3 pb-3">
               {album.name}
+            </p>
+            <p className="text-sm truncate  w-full text-white ">
+              <p className="text-secondary">Artists</p>
+              {album.artists}
             </p>
           </div>
         </motion.div>
@@ -83,7 +87,7 @@ function AlbumCard({ album }: { album: Album }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ ease: 'easeOut', duration: 0.5 }}
-          className="focus:outline-none absolute bottom-10 right-2 text-secondary hover:text-secondary2"
+          className="focus:outline-none absolute bottom-24 right-2 text-secondary hover:text-secondary2"
           onClick={(event) => {
             playPlaylistHandle(event);
           }}

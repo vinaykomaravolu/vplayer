@@ -166,12 +166,12 @@ function PlaylistCollection() {
       className="section-page"
     >
       <div className="flex flex-col flex-nowrap">
-        <Link to="/Playlists" className="w-8 h-8 rounded-full pb-2 ">
+        <Link to="/Playlists" className="w-8 h-8 rounded-full pb-2">
           <motion.button
             id="back"
             type="button"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="hover:text-secondary2 w-8 h-8 text-secondary  focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
           >
             <svg
@@ -191,11 +191,12 @@ function PlaylistCollection() {
 
         <div className="flex flex-row w-full flex-nowrap items-center">
           <AddToPlaylist
+            songsToAdd={selected}
             modelIsOpen={isEditOpen}
             setModelIsOpen={setIsEditOpen}
           />
 
-          <div className="flex-shrink-0 relative mb-4 cursor-pointer">
+          <div className="flex-shrink-0 relative mb-4 mt-4 cursor-pointer">
             <img
               src={playlistImage || DefaultImage}
               alt={DefaultImage}
@@ -233,8 +234,8 @@ function PlaylistCollection() {
               <div className="flex flex-row w-full pt-4 pb-4 justify-between flex-nowrap ">
                 <div className="flex flex-row flex-nowrap content-center items-center p-0">
                   <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     type="button"
                     onClick={() => {
                       playCollection();
@@ -255,7 +256,7 @@ function PlaylistCollection() {
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
-                            console.log(`Deleted ${song.name}`);
+                            console.log(`Add ${song.name} to favourited`);
                           });
                         }}
                         className="focus:outline-none"
@@ -274,7 +275,7 @@ function PlaylistCollection() {
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
-                            console.log(`Deleted ${song.name}`);
+                            console.log(`Add ${song.name} to favourited`);
                           });
                         }}
                         className="focus:outline-none"
@@ -290,12 +291,12 @@ function PlaylistCollection() {
                   {selected.length > 0 ? (
                     <div className="w-full flex flex-nowrap flex-row-reverse">
                       <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
-                            console.log(`Deleted ${song.name}`);
+                            console.log(`Add ${song.name} to Playlist`);
                           });
                           setIsEditOpen(true);
                         }}
@@ -310,12 +311,12 @@ function PlaylistCollection() {
                   ) : (
                     <div className="w-full flex flex-nowrap flex-row-reverse invisible">
                       <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
-                            console.log(`Deleted ${song.name}`);
+                            console.log(`Add ${song.name} to Playlist`);
                           });
                           setIsEditOpen(true);
                         }}
@@ -332,8 +333,8 @@ function PlaylistCollection() {
                   {selected.length > 0 ? (
                     <div className="w-full flex flex-nowrap flex-row-reverse">
                       <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
@@ -351,8 +352,8 @@ function PlaylistCollection() {
                   ) : (
                     <div className="w-full flex flex-nowrap flex-row-reverse invisible">
                       <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         type="button"
                         onClick={() => {
                           selected.forEach((song) => {
