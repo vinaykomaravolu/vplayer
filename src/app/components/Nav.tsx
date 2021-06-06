@@ -22,8 +22,8 @@ function NavLink({
   return (
     <Link
       to={to}
-      className={`hover:bg-${theme}-primary-2 block text-${theme}-primary-text ${
-        isActive ? `bg-${theme}-primary-2` : `hover:bg-${theme}-primary-2`
+      className={`hover:bg-${theme}-primary-hover block text-${theme}-primary-text ${
+        isActive ? `bg-${theme}-primary-2` : `hover:bg-${theme}-primary-hover`
       }`}
     >
       <span

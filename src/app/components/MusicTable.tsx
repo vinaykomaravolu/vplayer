@@ -23,7 +23,7 @@ function SongRow({
       className={`grid grid-cols-12
    text-white font-normal bg-${
      i % 2 === 0 ? `${theme}-primary-1` : `${theme}-primary-2`
-   } h-14 hover:bg-${theme}-secondary-2`}
+   } h-14 hover:bg-${theme}-secondary-hover`}
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`song-${i}`}

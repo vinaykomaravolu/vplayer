@@ -49,7 +49,7 @@ function AlbumCard({ album }: { album: Album }) {
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`relative shadow-md focus:outline-none bg-gradient-to-t from-${theme}-primary-1  via-${theme}-primary-2 to-${theme}-primary-3 w-44 h-64 rounded-md hover:to-${theme}-secondary-2 hover:from-${theme}-secondary-2 hover:via-${theme}-secondary-2`}
+          className={`relative shadow-md focus:outline-none bg-gradient-to-t from-${theme}-primary-1  via-${theme}-primary-2 to-${theme}-primary-3 w-44 h-64 rounded-md hover:to-${theme}-secondary-hover hover:from-${theme}-secondary-hover hover:via-${theme}-secondary-hover`}
         >
           <div id="content" className="p-2 h-full w-full">
             <img

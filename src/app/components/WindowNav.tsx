@@ -35,7 +35,7 @@ function WindowNav() {
           onClick={() => {
             closeWindow();
           }}
-          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2 px-3 py-1`}
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-hover px-3 py-1`}
           type="button"
         >
           <svg
@@ -55,7 +55,7 @@ function WindowNav() {
             maximizeWindow();
           }}
           id="maximizeapp"
-          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2  px-3 py-1 text-${theme}-secondary-text`}
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-hover  px-3 py-1 text-${theme}-secondary-text`}
           type="button"
         >
           <svg
@@ -72,7 +72,7 @@ function WindowNav() {
             minimizeWindow();
           }}
           id="minimizeapp"
-          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2 px-3 py-1 text-${theme}-secondary-text`}
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-hover px-3 py-1 text-${theme}-secondary-text`}
           type="button"
         >
           <svg

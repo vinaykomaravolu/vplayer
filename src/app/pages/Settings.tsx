@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ThemeContext } from '../utilities/ThemeContext';
+import TailwindInfo from '../../../tailwind.config';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -25,7 +26,13 @@ const paths: string[] = [
 const preferences: string[] = ['amber', 'retro'];
 
 function Settings() {
-  const { theme, setTheme } = React.useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
+  const [themes, setThemes] = useState<string[]>([]);
+
+  useEffect(() => {
+    console.log(TailwindInfo.themeCustomId);
+    setThemes(TailwindInfo.themeCustomId);
+  }, []);
 
   const changeTheme = (event: any) => {
     console.log(event.target.value);
@@ -95,19 +102,21 @@ function Settings() {
           id="prefernces-colors"
           className="flex flex-row flex-wrap w-full p-2"
         >
-          {preferences.map((style: string) => {
-            return (
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                value={`theme-${style}`}
-                onClick={changeTheme}
-                className={`shadow-md focus:outline-none mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-theme-${style}-primary-1 via-theme-${style}-primary-2 via-theme-${style}-secondary-2 to-theme-${style}-secondary-1`}
-                key={style}
-              />
-            );
-          })}
+          {themes
+            ? themes.map((style: string) => {
+                return (
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    value={`theme-${style}`}
+                    onClick={changeTheme}
+                    className={`shadow-md focus:outline-none mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-theme-${style}-primary-1 via-theme-${style}-primary-2 via-theme-${style}-secondary-2 to-theme-${style}-secondary-1`}
+                    key={style}
+                  />
+                );
+              })
+            : null}
         </div>
       </div>
     </motion.div>
