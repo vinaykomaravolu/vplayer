@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -21,78 +22,38 @@ const paths: string[] = [
   'A:\\Downloads\\Music\\Downloads\\Music\\Downloads\\Music\\Downloads\\Music\\Downloads\\Music\\',
 ];
 
-interface Styling {
-  primary: string;
-  primary2: string;
-  primary3: string;
-  secondary: string;
-  secondary2: string;
-}
-
-const preferences: Styling[] = [
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-  {
-    primary: '#0B0E11',
-    primary2: '#151A21',
-    primary3: '#242C37',
-    secondary: '#FFD700',
-    secondary2: '#F2AA4C',
-  },
-];
+const preferences: string[] = ['amber', 'retro'];
 
 function Settings() {
+  const { theme, setTheme } = React.useContext(ThemeContext);
+
+  const changeTheme = (event: any) => {
+    console.log(event.target.value);
+    setTheme(event.target.value);
+  };
+
   return (
     <motion.div
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
-      className="section-page"
+      className={`section-page scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
       id="settings"
     >
-      <div className="section-title ">Settings</div>
+      <div className={`section-title text-${theme}-primary-text `}>
+        Settings
+      </div>
       <div id="settings-musiclocation">
         <div className="flex justify-between w-full">
-          <div className="section-subtitle ">Where To Find Music</div>
+          <div className={`section-subtitle text-${theme}-secondary-text`}>
+            Where To Find Music
+          </div>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             type="button"
-            className="section-subtitle  subpixel-antialiased focus:outline-none hover:text-secondary2 text-secondary"
+            className={`section-subtitle  subpixel-antialiased focus:outline-none hover:text-${theme}-secondary-hover text-${theme}-secondary-text`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -108,13 +69,16 @@ function Settings() {
             </svg>
           </motion.button>
         </div>
-        <div className="bg-primary3 rounded-xl m-2 h-96 overflow-y-auto ">
-          <div className="divide-y p-5 divide-white ">
+        <div
+          className={`bg-${theme}-primary-3 rounded-xl m-2 h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
+        >
+          <div className={`divide-y p-5 divide-${theme}-secondary-text`}>
             {paths.map((path, i) => {
               return (
                 <p
-                  className="pl-4 pr-4 pt-2 pb-2 text-secondary w-full truncate"
-                  key={path}
+                  className={`pl-4 pr-4 pt-2 pb-2 text-${theme}-primary-text w-full truncate`}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={path + i}
                 >
                   {path}
                 </p>
@@ -124,18 +88,23 @@ function Settings() {
         </div>
       </div>
       <div id="settings-musiclocation">
-        <div className="section-subtitle">Preferences</div>
+        <div className={`section-subtitle text-${theme}-secondary-text`}>
+          Preferences
+        </div>
         <div
           id="prefernces-colors"
           className="flex flex-row flex-wrap w-full p-2"
         >
-          {preferences.map((style: Styling) => {
+          {preferences.map((style: string) => {
             return (
-              <motion.div
+              <motion.button
+                type="button"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`shadow-md mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-[${style.primary}] via-[${style.primary2}] via-[${style.secondary2}] to-[${style.secondary}]`}
-                key={style.primary + style.secondary}
+                value={`theme-${style}`}
+                onClick={changeTheme}
+                className={`shadow-md focus:outline-none mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-theme-${style}-primary-1 via-theme-${style}-primary-2 via-theme-${style}-secondary-2 to-theme-${style}-secondary-1`}
+                key={style}
               />
             );
           })}

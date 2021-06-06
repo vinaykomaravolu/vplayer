@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -8,14 +9,21 @@ const pageVariants = {
 };
 
 function Home() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   return (
     <motion.div
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
-      className="section-page"
+      className={`section-page scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className={`shadow-md mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-${theme}-primary-1 to-${theme}-secondary-1`}
+      />
       Fusce venenatis lobortis tristique. Nunc eget laoreet enim. Fusce sagittis
       posuere dolor, vitae consequat dolor consectetur quis. Nam nec tempor
       mauris. In hac habitasse platea dictumst. Donec non sapien diam. Phasellus

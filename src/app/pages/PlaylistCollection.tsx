@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { Album, Collection, Playlist, Song } from '../../objects/Object';
@@ -9,6 +9,7 @@ import AddToPlaylist from '../components/AddToPlaylist';
 import SearchBar from '../components/SearchBar';
 import Playlists from './Playlists';
 import PlaylistTable from '../components/PlaylistTable';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -105,6 +106,7 @@ function PlaylistCollection() {
     undefined
   );
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   function playCollection() {
     console.log(`Currently playing ${collection.name}`);
@@ -172,7 +174,7 @@ function PlaylistCollection() {
             type="button"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="hover:text-secondary2 w-8 h-8 text-secondary  focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
+            className={`hover:text-${theme}-secondary-hover w-8 h-8 text-${theme}-secondary-text focus:outline-none bg-${theme}-primary-text bg-opacity-10 rounded-full`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +204,9 @@ function PlaylistCollection() {
               alt={DefaultImage}
               className="rounded-md w-0 h-0 sm:w-44 sm:h-44 xl:w-64 xl:h-64 object-cover"
             />
-            <div className="flex absolute bg-white top-0 bottom-0 left-0 right-0 opacity-0 rounded-md text-opacity-0">
+            <div
+              className={`flex absolute bg-${theme}-primary-text top-0 bottom-0 left-0 right-0 opacity-0 rounded-md text-opacity-0`}
+            >
               <input
                 type="file"
                 className="w-full h-full"
@@ -216,8 +220,12 @@ function PlaylistCollection() {
             </div>
           </div>
 
-          <div className="text-secondary truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full">
-            <div className="w-full text-white truncate text-lg font-bold ">
+          <div
+            className={`text-${theme}-secondary-1 truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full`}
+          >
+            <div
+              className={`w-full text-${theme}-secondary-text truncate text-lg font-bold `}
+            >
               Playlist
             </div>
 
@@ -226,7 +234,7 @@ function PlaylistCollection() {
                 type="text"
                 name="playlistname"
                 defaultValue={playlistName}
-                className="overflow-hidden truncate w-full bg-transparent"
+                className={`text-${theme}-primary-text overflow-hidden truncate w-full bg-transparent`}
                 onChange={(e) => setPlaylistName(e.target.value)}
               />
             </div>

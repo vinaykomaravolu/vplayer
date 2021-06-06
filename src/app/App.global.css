@@ -29,10 +29,10 @@ nav {
   }
 
   .section-title {
-    @apply text-3xl font-bold p-2 text-secondary truncate;
+    @apply text-3xl font-bold p-2 truncate;
   }
 
   .section-subtitle {
-    @apply text-xl font-bold p-2 text-white truncate;
+    @apply text-xl font-bold p-2 truncate;
   }
 }

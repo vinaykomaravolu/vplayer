@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
 import { Album, Playlist, Song } from '../../objects/Object';
-import { AlbumCard, CreateAlbumCard } from '../components/AlbumCard';
+import AlbumCard from '../components/AlbumCard';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -14,6 +15,7 @@ function Albums() {
   const albums: Album[] = [];
   const songs: Song[] = [];
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const { theme, setTheme } = useContext(ThemeContext);
 
   function checkforDup(Alist: Album[], song: Song) {
     for (let i = 0; i < Alist.length; i += 1) {
@@ -66,7 +68,7 @@ function Albums() {
       id="albums"
     >
       <div className="flex flex-col h-auto">
-        <div className="section-title">Albums</div>
+        <div className={`section-title text-${theme}-primary-text`}>Albums</div>
         <div className="flex justify-end">
           <div id="search">
             <SearchBar

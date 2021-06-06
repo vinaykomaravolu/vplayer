@@ -1,11 +1,18 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState, useRef, createRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  createRef,
+  useContext,
+} from 'react';
 import { createPopper, VirtualElement } from '@popperjs/core';
 import { motion } from 'framer-motion';
 import { Console, timeStamp } from 'node:console';
 import { randomInt } from 'node:crypto';
 import DropdownData from '../types/DropdownData';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const dirIcon = (
   <svg
@@ -25,7 +32,9 @@ const Dropdown = ({
   data: DropdownData;
 }) => {
   // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
   const btnDropdownRef: React.RefObject<
     Element | VirtualElement | any
   > = createRef();
@@ -102,7 +111,7 @@ const Dropdown = ({
                 </button>
               ) : (
                 <button
-                  className="focus:outline-none w-48 h-full hover:bg-primary2 rounded text-left truncate pr-4"
+                  className={`focus:outline-none w-48 h-full hover:bg-${theme}-primary-2 rounded text-left truncate pr-4`}
                   type="button"
                   onMouseEnter={(event) => {
                     event.stopPropagation();
@@ -118,7 +127,7 @@ const Dropdown = ({
               )
             ) : (
               <button
-                className="focus:outline-none h-full w-48 hover:bg-primary2 rounded text-left pl-5 pr-4"
+                className={`focus:outline-none h-full w-48 hover:bg-${theme}-primary-2 rounded text-left pl-5 pr-4`}
                 type="button"
                 onMouseDown={
                   data.handle
@@ -137,13 +146,13 @@ const Dropdown = ({
               ref={popoverDropdownRef}
               className={`${
                 dropdownPopoverShow ? 'block ' : 'hidden '
-              } bg-primary3 text-base z-50 flex flex-col flex-nowrap text-left rounded shadow-lg `}
+              } bg-${theme}-primary-3 text-base z-50 flex flex-col flex-nowrap text-left rounded shadow-lg `}
               style={{ minWidth: '12rem' }}
             >
               {data.children?.map((child, i) => {
                 return (
                   <div
-                    className="text-sm font-normal h-8 w-full whitespace-nowrap bg-transparent text-white "
+                    className={`text-sm font-normal h-8 w-full whitespace-nowrap bg-transparent text-${theme}-primary-text`}
                     key={Math.random().toString(36)}
                   >
                     <Dropdown buttonStyle={buttonStyle} data={child} />

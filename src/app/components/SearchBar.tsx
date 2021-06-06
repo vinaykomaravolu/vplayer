@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const SearchIcon = (
   <svg
@@ -34,6 +35,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
   const { setState, state, handleSearch } = props;
   const node = useRef<any>();
   const [searchIsOpen, setSearchIsOpen] = useState<boolean>(true);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const handleClick = (event: any) => {
     if (node.current.contains(event.target)) {
@@ -69,7 +71,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
           searchIsOpen
             ? 'opacity-0 w-0'
             : 'opacity-100 w-64 sm:w-36 md:w-48 lg:w-64'
-        } pl-12 pr-9 text-base rounded-full z-0 transition-width transition-slowest ease duration-300 ease-in-out  focus:shadow focus:outline-none bg-primary2 text-white`}
+        } pl-12 pr-9 text-base rounded-full z-0 transition-width transition-slowest ease duration-300 ease-in-out  focus:shadow focus:outline-none bg-${theme}-primary-2 text-${theme}-primary-text`}
         placeholder="Search Music"
         disabled={searchIsOpen}
         onChange={(event) => {
@@ -84,9 +86,9 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
         onClick={() => {
           setSearchIsOpen(!searchIsOpen);
         }}
-        className={`focus:outline-none absolute top-1 text-secondary  ${
+        className={`focus:outline-none absolute top-1 text-${theme}-secondary-1  ${
           searchIsOpen
-            ? 'hover:text-secondary2 left-16'
+            ? `hover:text-${theme}-secondary-hover left-16`
             : 'pointer-events-none left-2'
         }`}
       >
@@ -99,7 +101,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
             setState('');
             handleSearch(event);
           }}
-          className="focus:outline-none absolute top-2.5 right-2 text-secondary hover:text-secondary2"
+          className={`focus:outline-none absolute top-2.5 right-2 text-${theme}-secondary-1 hover:text-${theme}-secondary-hover`}
         >
           {CloseIcon}
         </button>

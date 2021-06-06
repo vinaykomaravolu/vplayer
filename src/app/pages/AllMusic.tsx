@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
 import MusicTable from '../components/MusicTable';
 import { Song } from '../../objects/Object';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const PlayIcon = (
   <svg
@@ -29,6 +30,7 @@ function AllMusic() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selected, setSelected] = useState<Song[]>([]);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const songsList: Song[] = [];
@@ -62,14 +64,14 @@ function AllMusic() {
       className="section-page"
     >
       <div className="flex flex-col h-full">
-        <div className="section-title">Music</div>
+        <div className={`section-title text-${theme}-primary-text`}>Music</div>
         <div className="flex justify-between">
           <div id="play">
             <motion.button
               type="button"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className=" focus:outline-none text-secondary "
+              className={`focus:outline-none text-${theme}-secondary-1`}
             >
               {PlayIcon}
             </motion.button>

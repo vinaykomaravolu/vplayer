@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';
 import SongDropdown from './SongDropdown';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 function SongRow({
   song,
@@ -15,13 +16,14 @@ function SongRow({
   handleSelect: any;
 }) {
   const [isHover, setIsHover] = useState<boolean>(false);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <motion.div
       className={`grid grid-cols-12
    text-white font-normal bg-${
-     i % 2 === 0 ? 'primary' : 'primary2'
-   } h-14 hover:bg-secondary2`}
+     i % 2 === 0 ? `${theme}-primary-1` : `${theme}-primary-2`
+   } h-14 hover:bg-${theme}-secondary-2`}
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`song-${i}`}
@@ -35,32 +37,44 @@ function SongRow({
         setIsHover(false);
       }}
     >
-      <div className="col-span-4 flex items-center truncate mr-4 pl-5">
+      <div
+        className={`col-span-4 flex items-center truncate mr-4 pl-5 text-${theme}-primary-text`}
+      >
         <input
           type="checkbox"
           onClick={() => {
             handleSelect();
           }}
-          className={`cursor-pointer form-checkbox mr-2 h-7 w-7 text-secondary2 ${
-            isHover ? 'bg-primary3' : 'bg-transparent'
-          } border-secondary rounded-sm`}
+          className={`cursor-pointer rounded-md form-checkbox mr-2 h-7 w-7 text-${theme}-secondary-2 ${
+            isHover ? `bg-${theme}-primary-3` : 'bg-transparent'
+          } border-${theme}-secondary-1 rounded-sm`}
         />
         {song.name}
       </div>
-      <div className="col-span-3 flex items-center truncate mr-4">
+      <div
+        className={`col-span-3 flex items-center truncate mr-4 text-${theme}-primary-text`}
+      >
         {song.album}
       </div>
-      <div className="col-span-2 flex items-center truncate mr-4">
-        {song.artists}
+      <div
+        className={`col-span-2 items-center flex truncate mr-4 text-${theme}-primary-text`}
+      >
+        <div className="truncate ">{song.artists}</div>
       </div>
 
-      <div className="col-span-1 flex items-center truncate md:mr-4 sm:mr-0 sm:invisible md:visible ">
+      <div
+        className={`col-span-1 flex items-center truncate md:mr-4 sm:mr-0 mr-0 md:visible sm:visible invisible text-${theme}-primary-text`}
+      >
         {song.publish_year}
       </div>
-      <div className="col-span-1 flex items-center truncate mr-4">
+      <div
+        className={`col-span-1 flex items-center truncate mr-4 text-${theme}-primary-text`}
+      >
         {song.length}
       </div>
-      <div className="col-span-1 flex mr-4 justify-end">
+      <div
+        className={`col-span-1 flex mr-4 justify-end text-${theme}-primary-text`}
+      >
         {isHover ? <SongDropdown song={song} /> : null}
       </div>
     </motion.div>
@@ -78,6 +92,7 @@ function MusicTable({
 }) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const handleSelected = (song: Song) => {
     const sel: Song[] = [...selected];
@@ -96,11 +111,13 @@ function MusicTable({
   };
 
   return (
-    <div className="flex flex-col h-full divide-y divide-yellow-500  overflow-y-auto">
+    <div
+      className={`flex flex-col h-full divide-y divide-${theme}-secondary-1 overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
+    >
       <div
         id="headers"
         className={`grid grid-cols-12
-        } text-secondary font-medium pr-5`}
+        } text-${theme}-secondary-text font-medium pr-5`}
       >
         <motion.button
           className="focus:outline-none col-span-4 text-left pl-5"
@@ -188,7 +205,7 @@ function MusicTable({
         </motion.button>
 
         <motion.button
-          className="focus:outline-none col-span-1 text-left sm:invisible md:visible"
+          className="focus:outline-none col-span-1 text-left invisible sm:visible md:visible"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
@@ -244,7 +261,10 @@ function MusicTable({
           </div>
         </motion.button>
       </div>
-      <div id="rows" className=" overflow-y-auto h-full">
+      <div
+        id="rows"
+        className={`overflow-y-auto h-full scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
+      >
         {data
           .sort(function (a: Song, b: Song) {
             if (sortBy === '') {

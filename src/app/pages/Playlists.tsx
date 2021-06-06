@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
 import { Playlist } from '../../objects/Object';
 import { PlayListCard, CreatePlayListCard } from '../components/PlayListCard';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const PlayIcon = (
   <svg
@@ -27,6 +28,7 @@ const pageVariants = {
 function Playlists() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const playlistsList: Playlist[] = [];
@@ -85,7 +87,7 @@ function Playlists() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="section-page"
+      className={`section-page text-${theme}-primary-text`}
     >
       <div className="flex flex-col h-auto">
         <div className="section-title">Playlists</div>

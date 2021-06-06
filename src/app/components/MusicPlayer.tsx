@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!rc-slider/assets/index.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Slider from 'rc-slider';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -17,34 +17,19 @@ import {
   shuffleIcon,
   shuffleIconOf,
 } from './icons';
-
-const progressBar = () => {
-  return (
-    <Slider
-      style={{ width: '100%' }}
-      reverse={false}
-      min={0 /** Change this */}
-      max={100 /** Change this */}
-      step={1 /** Change this */}
-      trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
-      railStyle={{
-        backgroundColor: '#F2AA4C',
-        height: 6,
-        opacity: 0.5,
-      }}
-    />
-  );
-};
+import { ThemeContext } from '../utilities/ThemeContext';
+import ThemeCSS from '../utilities/ThemeCSS';
 
 const IconButton = (props: { icon: any; handleClick: () => void }) => {
   const { icon, handleClick } = props;
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       type="button"
-      className="section-subtitle text-secondary  subpixel-antialiased focus:outline-none hover:text-secondary2"
+      className={`section-subtitle text-${theme}-secondary-text  subpixel-antialiased focus:outline-none hover:text-${theme}-secondary-hover`}
       onClick={() => {
         handleClick();
       }}
@@ -62,6 +47,8 @@ function MusicPlayer() {
   const [isVolOn, setIsVolOn] = useState<boolean>(false);
   const [Shuffle, setShuffle] = useState<boolean>(false);
   const [Repeat, setRepeat] = useState<boolean>(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
   let currentTime = 0;
   let songName = 'Song Name';
   let songAuthor = 'Song Artist';
@@ -103,7 +90,9 @@ function MusicPlayer() {
   }
 
   return (
-    <div className="bg-primary3 flex flex-row justify-start h-full w-full">
+    <div
+      className={`bg-${theme}-primary-3 flex flex-row justify-start h-full w-full`}
+    >
       <div className="w-36 md:w-60 h-full flex flex-row">
         <div className="h-0 w-0  md:h-28 md:w-28 rounded-2xl">
           <img
@@ -112,8 +101,9 @@ function MusicPlayer() {
             className="h-full w-full object-cover p-2 rounded-2xl"
           />
         </div>
-
-        <div className="flex flex-col justify-center content-center overflow-hidden text-secondary">
+        <div
+          className={`flex flex-col justify-center content-center overflow-hidden text-${theme}-secondary-1`}
+        >
           <div className="w-32 p-2">
             <div className="text-lg truncate">{songName}</div>
             <div className="text-sm truncate"> {songAuthor} </div>{' '}
@@ -203,7 +193,7 @@ function MusicPlayer() {
           </div>
         </div>
         <div className="flex flex-row justify-center w-full ">
-          <div className="text-sm pr-3 pl-3 text-secondary ">
+          <div className={`text-sm pr-3 pl-3 text-${theme}-secondary-1 `}>
             {secondsToMin(currentTime)}:{secondsToSec(currentTime)}
           </div>
           <div
@@ -217,32 +207,35 @@ function MusicPlayer() {
               min={0 /** Change this */}
               max={songTime /** Change this */}
               step={1 /** Change this */}
-              trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
+              trackStyle={{
+                backgroundColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
+                height: 6,
+              }}
               handleStyle={
                 isTimelineHover
                   ? {
-                      borderColor: '#FFD700',
+                      borderColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
                       height: 16,
                       width: 16,
-                      backgroundColor: '#151A21',
+                      backgroundColor: `${ThemeCSS(`${theme}-primary`)['2']}`,
                     }
                   : {
-                      borderColor: '#FFD700',
+                      borderColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
                       height: 6,
                       width: 0,
                       marginTop: 0,
-                      backgroundColor: '#FFD700',
+                      backgroundColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
                     }
               }
               railStyle={{
-                backgroundColor: '#F2AA4C',
+                backgroundColor: `${ThemeCSS(`${theme}-secondary`)['2']}`,
                 height: 6,
                 opacity: 0.5,
               }}
             />
           </div>
 
-          <div className="text-sm pr-4 pl-4 text-secondary">
+          <div className={`text-sm pr-4 pl-4 text-${theme}-secondary-1`}>
             {secondsToMin(songTime)}:{secondsToSec(songTime)}
           </div>
         </div>
@@ -314,25 +307,32 @@ function MusicPlayer() {
                   min={0 /** Change this */}
                   max={100 /** Change this */}
                   step={1 /** Change this */}
-                  trackStyle={{ backgroundColor: '#FFD700', height: 6 }}
+                  trackStyle={{
+                    backgroundColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
+                    height: 6,
+                  }}
                   handleStyle={
                     isVolumelineHover
                       ? {
-                          borderColor: '#FFD700',
+                          borderColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
                           height: 16,
                           width: 16,
-                          backgroundColor: '#151A21',
+                          backgroundColor: `${
+                            ThemeCSS(`${theme}-primary`)['2']
+                          }`,
                         }
                       : {
-                          borderColor: '#FFD700',
+                          borderColor: `${ThemeCSS(`${theme}-secondary`)['1']}`,
                           height: 6,
                           width: 0,
                           marginTop: 0,
-                          backgroundColor: '#FFD700',
+                          backgroundColor: `${
+                            ThemeCSS(`${theme}-secondary`)['1']
+                          }`,
                         }
                   }
                   railStyle={{
-                    backgroundColor: '#F2AA4C',
+                    backgroundColor: `${ThemeCSS(`${theme}-secondary`)['2']}`,
                     height: 6,
                     opacity: 0.5,
                   }}
