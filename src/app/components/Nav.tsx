@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PlayListMini from './PlayListsMini';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 function NavLink({
   to = '/',
@@ -16,14 +17,18 @@ function NavLink({
   title: string;
   isTitleEnabled: boolean;
 }) {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   return (
     <Link
       to={to}
-      className={`hover:bg-primary2 block text-white ${
-        isActive ? 'bg-primary2' : 'hover:bg-primary2'
+      className={`hover:bg-${theme}-primary-2 block text-${theme}-primary-text ${
+        isActive ? `bg-${theme}-primary-2` : `hover:bg-${theme}-primary-2`
       }`}
     >
-      <span className="inline-grid grid-cols-4 px-3 py-2">
+      <span
+        className={`inline-grid grid-cols-4 px-3 py-2 text-${theme}-secondary-text`}
+      >
         {icon}
         {isTitleEnabled ? (
           <span>
@@ -44,7 +49,7 @@ function NavLink({
 const HomeIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className=" h-6 w-5 fill-current text-secondary"
+    className=" h-6 w-5 fill-current"
     viewBox="0 0 20 20"
   >
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -54,7 +59,7 @@ const HomeIcon = (
 const AllMusicIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current"
     viewBox="0 0 20 20"
   >
     <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
@@ -64,7 +69,7 @@ const AllMusicIcon = (
 const AlbumsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -75,7 +80,7 @@ const AlbumsIcon = (
 const PlaylistsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current "
     viewBox="0 0 20 20"
   >
     <path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM15 3a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2z" />
@@ -85,7 +90,7 @@ const PlaylistsIcon = (
 const SettingsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-5 fill-current text-secondary"
+    className="h-6 w-5 fill-current"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -100,21 +105,23 @@ const SettingsIcon = (
 function Nav() {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
   return (
     <div
       data-testid="nav"
       className={`transition-width transition-slowest ease duration-250 ease-in-out flex flex-col flex-shrink-1 ${
         isOpen ? 'w-11' : 'w-48'
-      } h-full bg-primary3 shadow-2xl`}
+      } h-full bg-${theme}-primary-3 shadow-2xl`}
     >
       <button
         type="button"
-        className="px-3 py-3 hover:bg-primary block text-white focus:outline-none"
+        className={`px-3 py-3 hover:bg-${theme}-primary-hover block text-${theme}-primary-text focus:outline-none`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 fill-current text-secondary"
+          className="h-5 w-5 fill-current "
           viewBox="0 0 20 20"
         >
           <path
@@ -166,7 +173,7 @@ function Nav() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.05 }}
               type="button"
-              className="absolute top-1 right-2 subpixel-antialiased focus:outline-none hover:text-secondary2 text-secondary "
+              className={`absolute top-1 right-2 subpixel-antialiased focus:outline-none hover:text-${theme}-secondary-hover  text-${theme}-secondary-1  `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +194,9 @@ function Nav() {
 
       {isOpen ? null : (
         <div className="w-full h-1/2 p-2 flex flex-nowrap">
-          <div className="flex flex-nowrap bg-primary2 rounded-md w-full h-full ">
+          <div
+            className={`flex flex-nowrap bg-${theme}-primary-2 rounded-md w-full h-full `}
+          >
             <PlayListMini />
           </div>
         </div>

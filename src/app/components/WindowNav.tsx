@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 function WindowNav() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   function closeWindow() {
     const remote = window.require ? window.require('electron').remote : null;
     const WIN = remote.getCurrentWindow();
@@ -32,12 +35,12 @@ function WindowNav() {
           onClick={() => {
             closeWindow();
           }}
-          className="focus:outline-none flex-none group hover:bg-primary2 px-3 py-1"
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2 px-3 py-1`}
           type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 fill-current text-secondary"
+            className={`h-5 w-5 fill-current text-${theme}-secondary-1 `}
             viewBox="0 0 20 20"
           >
             <path
@@ -52,12 +55,12 @@ function WindowNav() {
             maximizeWindow();
           }}
           id="maximizeapp"
-          className="focus:outline-none flex-none group hover:bg-primary2 px-3 py-1"
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2  px-3 py-1 text-${theme}-secondary-text`}
           type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 fill-current text-secondary"
+            className="h-5 w-5 fill-current"
             viewBox="0 0 20 20"
           >
             <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
@@ -69,12 +72,12 @@ function WindowNav() {
             minimizeWindow();
           }}
           id="minimizeapp"
-          className="focus:outline-none flex-none group hover:bg-primary2 px-3 py-1"
+          className={`focus:outline-none flex-none group hover:bg-${theme}-primary-2 px-3 py-1 text-${theme}-secondary-text`}
           type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 fill-current text-secondary"
+            className="h-5 w-5 fill-current"
             viewBox="0 0 20 20"
           >
             <path

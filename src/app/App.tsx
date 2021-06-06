@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useContext } from 'react';
 import { HashRouter, Switch, Redirect, Route, NavLink } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Howl } from 'howler';
@@ -13,6 +13,7 @@ import WindowNav from './components/WindowNav';
 import './App.global.css';
 import MusicPlayer from './components/MusicPlayer';
 import AlbumCollection from './pages/AlbumCollection';
+import TC, { ThemeContext } from './utilities/ThemeContext';
 
 const { ipcRenderer } = require('electron');
 
@@ -103,7 +104,9 @@ const TestC = () => {
   );
 };
 
-export default function App() {
+function Main() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   return (
     <Suspense fallback={<TestC />}>
       <HashRouter>
@@ -111,7 +114,7 @@ export default function App() {
           <div className="h-full w-full flex flex-col">
             <div
               data-testid="app"
-              className="bg-gradient-to-t from-primary to-primary3 flex flex-row h-full overflow-y-auto"
+              className={`bg-gradient-to-t from-${theme}-primary-1 to-${theme}-primary-3 flex flex-row h-full overflow-y-auto `}
             >
               <WindowNav />
               <div className="h-full">
@@ -142,5 +145,13 @@ export default function App() {
         </div>
       </HashRouter>
     </Suspense>
+  );
+}
+
+export default function App() {
+  return (
+    <TC>
+      <Main />
+    </TC>
   );
 }

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Playlist } from '../../objects/Object';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 function PlayListsMini() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const playlistsList: Playlist[] = [];
@@ -58,13 +60,15 @@ function PlayListsMini() {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex flex-col flex-nowrap w-full  overflow-y-auto">
+      <div
+        className={`flex flex-col flex-nowrap w-full  overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
+      >
         {playlists.map((playlist) => {
           return (
             <Link key={playlist.name} to={`/playlists/${playlist.name}`}>
               <button
                 type="button"
-                className="p-2 w-full focus:outline-none truncate text-sm text-white hover:bg-secondary2 rounded-md"
+                className={`p-2 w-full focus:outline-none truncate text-sm text-${theme}-primary-text  hover:bg-${theme}-secondary-2  rounded-md`}
               >
                 {playlist.name}
               </button>

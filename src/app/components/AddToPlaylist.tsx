@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import { motion } from 'framer-motion';
 import { Playlist, Song } from '../../objects/Object';
-import DefaultImage from '../../../assets/images/default.png';
-import { CreatePlayListCard, PlayListCard } from './PlayListCard';
-import MusicTable from './MusicTable';
 import PlaylistTable from './PlaylistTable';
+import { ThemeContext } from '../utilities/ThemeContext';
+import ThemeCSS from '../utilities/ThemeCSS';
 
-const styles: any = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#242C37',
-    borderColor: '#242C37',
-    position: 'absolute',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  },
-};
+function styles(theme: string): any {
+  return {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: `${ThemeCSS(`${theme}-primary`)['3']}`,
+      borderColor: `${ThemeCSS(`${theme}-primary`)['3']}`,
+      position: 'absolute',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    },
+  };
+}
 
 const ExitIcon = (
   <svg
@@ -39,52 +40,6 @@ const ExitIcon = (
   </svg>
 );
 
-function PlaylistRow({
-  playlist,
-  i,
-  handleSelect,
-}: {
-  playlist: Playlist;
-  i: number;
-  handleSelect: any;
-}) {
-  const [isHover, setIsHover] = useState<boolean>(false);
-
-  return (
-    <motion.div
-      className={`grid grid-cols-12
-   text-white font-normal bg-${
-     i % 2 === 0 ? 'primary' : 'primary2'
-   } h-14 hover:bg-secondary2`}
-      // eslint-disable-next-line react/no-array-index-key
-      key={i}
-      id={`playlist-${i}`}
-      onDoubleClick={(event) => {
-        console.log(playlist);
-      }}
-      onMouseEnter={() => {
-        setIsHover(true);
-      }}
-      onMouseLeave={() => {
-        setIsHover(false);
-      }}
-    >
-      <div className="col-span-4 flex items-center truncate mr-4 pl-5">
-        <input
-          type="checkbox"
-          onClick={() => {
-            handleSelect();
-          }}
-          className={`cursor-pointer form-checkbox mr-2 h-7 w-7 text-secondary2 ${
-            isHover ? 'bg-primary3' : 'bg-transparent'
-          } border-secondary rounded-sm`}
-        />
-        {playlist.name}
-      </div>
-    </motion.div>
-  );
-}
-
 function AddToPlaylist({
   modelIsOpen,
   setModelIsOpen,
@@ -97,6 +52,7 @@ function AddToPlaylist({
   let subtitle: any;
   const [playlist, setPlaylist] = useState<Playlist[]>([]);
   const [selected, setSelected] = useState<Playlist[]>([]);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   function updatePlaylist() {
     return 0;
@@ -139,17 +95,19 @@ function AddToPlaylist({
         onRequestClose={() => {
           setModelIsOpen(false);
         }}
-        style={styles}
+        style={styles(theme)}
         contentLabel="Add to playlist"
       >
         <div className="flex flex-col w-96 h-96">
           <div className="flex flex-row justify-between">
-            <div className="text-secondary truncate text-2xl font-bold pb-4">
+            <div
+              className={`text-${theme}-secondary-1 truncate text-2xl font-bold pb-4`}
+            >
               Add to Playlist
             </div>
             <button
               type="button"
-              className="text-secondary truncate text-lg font-bold "
+              className={`text-${theme}-secondary-1 hover:text-${theme}-secondary-hover truncate text-sm font-bold focus:outline-none`}
               onClick={() => {
                 setModelIsOpen(false);
               }}
@@ -157,7 +115,9 @@ function AddToPlaylist({
               {ExitIcon}
             </button>
           </div>
-          <div className="overflow-y-auto w-full h-full">
+          <div
+            className={`overflow-y-auto w-full h-full scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
+          >
             <PlaylistTable
               data={playlist}
               selected={selected}

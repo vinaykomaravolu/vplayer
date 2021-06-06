@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { Album, Collection, Song } from '../../objects/Object';
@@ -6,6 +6,7 @@ import MusicTable from '../components/MusicTable';
 import DefaultImage from '../../../assets/images/default.png';
 import SearchBar from '../components/SearchBar';
 import AddToPlaylist from '../components/AddToPlaylist';
+import { ThemeContext } from '../utilities/ThemeContext';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -98,10 +99,10 @@ function AlbumCollection() {
   });
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selected, setSelected] = useState<Song[]>([]);
-
   const [albumName, setAlbumName] = useState<string>('');
   const [albumImage, setAlbumImage] = useState<string | undefined>(undefined);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const { theme, setTheme } = useContext(ThemeContext);
 
   function playCollection() {
     console.log(`Currently playing ${collection.name}`);
@@ -175,7 +176,7 @@ function AlbumCollection() {
             type="button"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="hover:text-secondary2 w-8 h-8 text-secondary  focus:outline-none hover:text-secondary2 bg-white bg-opacity-10 rounded-full"
+            className={`hover:text-${theme}-secondary-hover w-8 h-8 text-${theme}-secondary-text focus:outline-none  bg-${theme}-primary-text bg-opacity-10 rounded-full`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +206,9 @@ function AlbumCollection() {
               alt={DefaultImage}
               className="rounded-md w-0 h-0 sm:w-44 sm:h-44 xl:w-64 xl:h-64 object-cover"
             />
-            <div className="flex absolute bg-white top-0 bottom-0 left-0 right-0 opacity-0 rounded-md text-opacity-0">
+            <div
+              className={`flex absolute bg-${theme}-primary-3 top-0 bottom-0 left-0 right-0 opacity-0 rounded-md text-opacity-0`}
+            >
               <input
                 type="file"
                 className="w-full h-full"
@@ -219,16 +222,24 @@ function AlbumCollection() {
             </div>
           </div>
 
-          <div className="text-secondary truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full">
-            <div className="w-full text-white truncate text-base font-bold ">
+          <div
+            className={`text-${theme}-primary-text  truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full`}
+          >
+            <div
+              className={`w-full text-${theme}-secondary-text truncate text-base font-bold `}
+            >
               Album
             </div>
             {collection.name}
 
-            <div className="w-full text-white truncate text-base font-bold pt-4">
+            <div
+              className={`w-full text-${theme}-secondary-text truncate text-base font-bold pt-4`}
+            >
               Artist
             </div>
-            <div className="text-2xl truncate">{collection.artists}</div>
+            <div className={`text-2xl truncate text-${theme}-primary-text`}>
+              {collection.artists}
+            </div>
 
             <div>
               <div className="flex flex-row w-full justify-between flex-nowrap ">
@@ -240,13 +251,15 @@ function AlbumCollection() {
                     onClick={() => {
                       playCollection();
                     }}
-                    className="focus:outline-none"
+                    className={`focus:outline-none text-${theme}-secondary-1`}
                   >
                     {PlayIcon}
                   </motion.button>
                 </div>
               </div>
-              <div className="w-full h-auto flex flex-nowrap content-center justify-between">
+              <div
+                className={`w-full h-auto flex flex-nowrap content-center justify-between text-${theme}-secondary-text`}
+              >
                 <div className="flex flex-row flex-nowrap">
                   {selected.length > 0 ? (
                     <div className="w-full flex flex-nowrap flex-row-reverse">
