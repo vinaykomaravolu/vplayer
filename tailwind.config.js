@@ -1,6 +1,5 @@
 /* eslint-disable global-require */
 module.exports = {
-  purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {

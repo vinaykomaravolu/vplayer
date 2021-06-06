@@ -24,6 +24,7 @@ function Home() {
         whileTap={{ scale: 0.9 }}
         className={`shadow-md mr-4 mb-4 w-24 h-24 rounded-2xl bg-gradient-to-r from-${theme}-primary-1 to-${theme}-secondary-1`}
       />
+      {`from-${theme}-primary-1`}
       Fusce venenatis lobortis tristique. Nunc eget laoreet enim. Fusce sagittis
       posuere dolor, vitae consequat dolor consectetur quis. Nam nec tempor
       mauris. In hac habitasse platea dictumst. Donec non sapien diam. Phasellus
