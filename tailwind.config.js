@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 module.exports = {
+  themeCustomId: ['amber', 'retro', 'chess'],
   theme: {
     extend: {
       colors: {
@@ -28,6 +29,19 @@ module.exports = {
           2: '#b5179e',
           hover: '#b5179e',
           text: '#f72585',
+        },
+        'theme-chess-primary': {
+          1: '#f8f9fa',
+          2: '#dee2e6',
+          3: '#ced4da',
+          hover: '#adb5bd',
+          text: '#212529',
+        },
+        'theme-chess-secondary': {
+          1: '#212529',
+          2: '#343a40',
+          hover: '#f8f9fa',
+          text: '#212529',
         },
       },
       transitionProperty: {

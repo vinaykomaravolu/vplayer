@@ -42,7 +42,7 @@ function PlaylistRow({
        : i % 2 === 0
        ? `bg-${theme}-primary-1`
        : `bg-${theme}-primary-2`
-   } h-14 hover:bg-${theme}-secondary-2 w-full`}
+   } h-14 hover:bg-${theme}-secondary-hover w-full`}
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`playlist-${i}`}

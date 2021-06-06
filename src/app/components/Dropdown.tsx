@@ -111,7 +111,7 @@ const Dropdown = ({
                 </button>
               ) : (
                 <button
-                  className={`focus:outline-none w-48 h-full hover:bg-${theme}-primary-2 rounded text-left truncate pr-4`}
+                  className={`focus:outline-none w-48 h-full hover:bg-${theme}-primary-hover rounded text-left truncate pr-4`}
                   type="button"
                   onMouseEnter={(event) => {
                     event.stopPropagation();
@@ -127,7 +127,7 @@ const Dropdown = ({
               )
             ) : (
               <button
-                className={`focus:outline-none h-full w-48 hover:bg-${theme}-primary-2 rounded text-left pl-5 pr-4`}
+                className={`focus:outline-none h-full w-48 hover:bg-${theme}-primary-hover rounded text-left pl-5 pr-4`}
                 type="button"
                 onMouseDown={
                   data.handle
