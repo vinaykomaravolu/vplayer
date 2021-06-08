@@ -8,14 +8,14 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import DefaultImage from '../../../assets/images/default.png';
 import {
-  volOn,
-  volOf,
-  PlayIcon,
-  PauseIcon,
-  repeatIcon,
-  repeatIconOf,
-  shuffleIcon,
-  shuffleIconOf,
+  MusicPlayervolOn,
+  MusicPlayervolOf,
+  MusicPlayerPlayIcon,
+  MusicPlayerPauseIcon,
+  MusicPlayerrepeatIcon,
+  MusicPlayerrepeatIconOf,
+  MusicPlayershuffleIcon,
+  MusicPlayershuffleIconOf,
 } from './icons';
 import { ThemeContext } from '../utilities/ThemeContext';
 import ThemeCSS from '../utilities/ThemeCSS';
@@ -119,7 +119,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={shuffleIcon}
+              icon={MusicPlayershuffleIcon}
               handleClick={() => {
                 setShuffle(false);
               }}
@@ -131,7 +131,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={shuffleIconOf}
+              icon={MusicPlayershuffleIconOf}
               handleClick={() => {
                 setShuffle(true);
               }}
@@ -146,7 +146,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={PlayIcon}
+              icon={MusicPlayerPlayIcon}
               handleClick={() => {
                 setPlaying(true);
               }}
@@ -158,7 +158,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={PauseIcon}
+              icon={MusicPlayerPauseIcon}
               handleClick={() => {
                 setPlaying(false);
               }}
@@ -173,7 +173,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={repeatIcon}
+              icon={MusicPlayerrepeatIcon}
               handleClick={() => {
                 setRepeat(false);
               }}
@@ -185,7 +185,7 @@ function MusicPlayer() {
             }`}
           >
             <IconButton
-              icon={repeatIconOf}
+              icon={MusicPlayerrepeatIconOf}
               handleClick={() => {
                 setRepeat(true);
               }}
@@ -276,7 +276,7 @@ function MusicPlayer() {
                 } `}
               >
                 <IconButton
-                  icon={volOn}
+                  icon={MusicPlayervolOn}
                   handleClick={() => {
                     setIsVolOn(false);
                   }}
@@ -289,7 +289,7 @@ function MusicPlayer() {
                 } `}
               >
                 <IconButton
-                  icon={volOf}
+                  icon={MusicPlayervolOf}
                   handleClick={() => {
                     setIsVolOn(true);
                   }}
