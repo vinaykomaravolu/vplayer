@@ -13,16 +13,7 @@ import { Console, timeStamp } from 'node:console';
 import { randomInt } from 'node:crypto';
 import DropdownData from '../types/DropdownData';
 import { ThemeContext } from '../utilities/ThemeContext';
-
-const dirIcon = (
-  <svg
-    className="fill-current h-5 w-5"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-  >
-    <path d="M8.854 11.646l5.792-5.792a.5.5 0 01.854.353v11.586a.5.5 0 01-.854.353l-5.792-5.792a.5.5 0 010-.708z" />
-  </svg>
-);
+import { DropdowndirIcon } from './icons';
 
 const Dropdown = ({
   buttonStyle,
@@ -120,7 +111,7 @@ const Dropdown = ({
                   }}
                 >
                   <div ref={btnDropdownRef} className="flex flex-row w-full">
-                    <div>{dirIcon}</div>
+                    <div>{DropdowndirIcon}</div>
                     <div className="truncate w-full">{data.name}</div>
                   </div>
                 </button>

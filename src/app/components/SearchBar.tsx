@@ -1,35 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { ThemeContext } from '../utilities/ThemeContext';
-
-const SearchIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-8 w-8"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
-const CloseIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
+import { SearchBarSearchIcon, SearchBarCloseIcon } from './icons';
 
 function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
   const { setState, state, handleSearch } = props;
@@ -92,7 +63,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
             : 'pointer-events-none left-2'
         }`}
       >
-        {SearchIcon}
+        {SearchBarSearchIcon}
       </button>
       {state !== '' ? (
         <button
@@ -103,7 +74,7 @@ function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
           }}
           className={`focus:outline-none absolute top-2.5 right-2 text-${theme}-secondary-1 hover:text-${theme}-secondary-hover`}
         >
-          {CloseIcon}
+          {SearchBarCloseIcon}
         </button>
       ) : null}
     </div>

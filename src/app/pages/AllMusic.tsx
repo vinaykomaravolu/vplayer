@@ -1,60 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import ReactTooltip from 'react-tooltip';
 import SearchBar from '../components/SearchBar';
 import MusicTable from '../components/MusicTable';
 import { Song } from '../../objects/Object';
 import { ThemeContext } from '../utilities/ThemeContext';
 import AddToPlaylist from '../components/AddToPlaylist';
-
-const PlayIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-16 w-16"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
-const heart = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-8 w-8"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-    />
-  </svg>
-);
-
-const AddIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-8 w-8"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-    />
-  </svg>
-);
+import {
+  AllMusicAddIcon,
+  AllMusicHeart,
+  AllMusicPlayIcon,
+} from '../components/icons';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -100,7 +55,6 @@ function AllMusic() {
       exit="exit"
       className="section-page"
     >
-      <ReactTooltip />
       <div className="flex flex-col h-full">
         <AddToPlaylist
           songsToAdd={selected}
@@ -118,7 +72,7 @@ function AllMusic() {
                 whileTap={{ scale: 0.9 }}
                 className={`focus:outline-none text-${theme}-secondary-1`}
               >
-                {PlayIcon}
+                {AllMusicPlayIcon}
               </motion.button>
             </div>
 
@@ -137,7 +91,7 @@ function AllMusic() {
                     className="focus:outline-none"
                   >
                     <div className="flex flex-nowrap text-xl pl-2 pr-2">
-                      <div className="pr-1"> {heart} </div>
+                      <div className="pr-1"> {AllMusicHeart} </div>
                       Favourite
                     </div>
                   </motion.button>
@@ -161,7 +115,7 @@ function AllMusic() {
                     className="focus:outline-none"
                   >
                     <div className="flex flex-nowrap text-xl pl-2 pr-2">
-                      {AddIcon}
+                      {AllMusicAddIcon}
                       Add to Playlist
                     </div>
                   </motion.button>
