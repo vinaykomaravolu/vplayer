@@ -36,13 +36,13 @@ function PlaylistRow({
   return (
     <motion.div
       className={`cursor-pointer
-   text-white font-normal ${
-     isSelected
-       ? `bg-${theme}-secondary-2`
-       : i % 2 === 0
-       ? `bg-${theme}-primary-1`
-       : `bg-${theme}-primary-2`
-   } h-14 hover:bg-${theme}-secondary-hover w-full`}
+   text-${theme}-primary-text font-normal ${
+        isSelected
+          ? `bg-${theme}-secondary-2`
+          : i % 2 === 0
+          ? `bg-${theme}-primary-1`
+          : `bg-${theme}-primary-2`
+      } h-14 hover:bg-${theme}-secondary-hover w-full`}
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`playlist-${i}`}
