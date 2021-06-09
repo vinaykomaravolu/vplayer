@@ -13,7 +13,7 @@ import { Console, timeStamp } from 'node:console';
 import { randomInt } from 'node:crypto';
 import DropdownData from '../types/DropdownData';
 import { ThemeContext } from '../utilities/ThemeContext';
-import { DropdowndirIcon } from './icons';
+import { DropdowndirIcon } from './Icons';
 
 const Dropdown = ({
   buttonStyle,

@@ -11,7 +11,7 @@ import {
   AlbumCollectionAddIcon,
   AlbumCollectionHeart,
   AlbumCollectionPlayIcon,
-} from '../components/icons';
+} from '../components/Icons';
 
 const pageVariants = {
   initial: { opacity: 0 },

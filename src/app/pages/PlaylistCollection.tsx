@@ -15,7 +15,7 @@ import {
   PlaylistCollectionDeleteIcon,
   PlaylistCollectionHeart,
   PlaylistCollectionPlayIcon,
-} from '../components/icons';
+} from '../components/Icons';
 
 const pageVariants = {
   initial: { opacity: 0 },

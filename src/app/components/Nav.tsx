@@ -9,7 +9,7 @@ import {
   NavHomeIcon,
   NavPlaylistsIcon,
   NavSettingsIcon,
-} from './icons';
+} from './Icons';
 
 function NavLink({
   to = '/',

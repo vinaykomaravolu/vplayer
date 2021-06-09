@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Album } from '../../objects/Object';
 import DefaultImage from '../../../assets/images/default.png';
 import { ThemeContext } from '../utilities/ThemeContext';
-import { AlbumCardPlayIcon } from './icons';
+import { AlbumCardPlayIcon } from './Icons';
 
 const varients = {
   initial: { opacity: 0 },

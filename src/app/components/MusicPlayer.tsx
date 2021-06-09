@@ -16,7 +16,7 @@ import {
   MusicPlayerrepeatIconOf,
   MusicPlayershuffleIcon,
   MusicPlayershuffleIconOf,
-} from './icons';
+} from './Icons';
 import { ThemeContext } from '../utilities/ThemeContext';
 import ThemeCSS from '../utilities/ThemeCSS';
 

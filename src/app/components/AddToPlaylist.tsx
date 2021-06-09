@@ -5,7 +5,7 @@ import { Playlist, Song } from '../../objects/Object';
 import PlaylistTable from './PlaylistTable';
 import { ThemeContext } from '../utilities/ThemeContext';
 import ThemeCSS from '../utilities/ThemeCSS';
-import { AddToPlaylistExitIcon } from './icons';
+import { AddToPlaylistExitIcon } from './Icons';
 
 function styles(theme: string): any {
   return {

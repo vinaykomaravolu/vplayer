@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { ThemeContext } from '../utilities/ThemeContext';
-import { SearchBarSearchIcon, SearchBarCloseIcon } from './icons';
+import { SearchBarSearchIcon, SearchBarCloseIcon } from './Icons';
 
 function SearchBar(props: { setState: any; state: string; handleSearch: any }) {
   const { setState, state, handleSearch } = props;

@@ -3,7 +3,7 @@ import Dropdown from './Dropdown';
 import DropdownData from '../types/DropdownData';
 import { Song, Playlist } from '../../objects/Object';
 import { ThemeContext } from '../utilities/ThemeContext';
-import { SongDropdownMoreIcon } from './icons';
+import { SongDropdownMoreIcon } from './Icons';
 
 function SongDropDown({ song }: { song: Song }) {
   const [loadPlaylist, setLoadPlaylist] = useState<boolean>(false);

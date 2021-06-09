@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Playlist } from '../../objects/Object';
 import DefaultImage from '../../../assets/images/default.png';
 import { ThemeContext } from '../utilities/ThemeContext';
-import { PlayListCardPlayIcon } from './icons';
+import { PlayListCardPlayIcon } from './Icons';
 
 function CreatePlayListCard() {
   const { theme, setTheme } = useContext(ThemeContext);

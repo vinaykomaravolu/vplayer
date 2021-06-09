@@ -9,7 +9,7 @@ import {
   AllMusicAddIcon,
   AllMusicHeart,
   AllMusicPlayIcon,
-} from '../components/icons';
+} from '../components/Icons';
 
 const pageVariants = {
   initial: { opacity: 0 },
