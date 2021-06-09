@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, Link, useHistory } from 'react-router-dom';
-import { Album, Collection, Playlist, Song } from '../../objects/Object';
+import { useParams, Link } from 'react-router-dom';
+import { Collection, Song } from '../../objects/Object';
 import MusicTable from '../components/MusicTable';
 import DefaultImage from '../../../assets/images/default.png';
 import AddToPlaylist from '../components/AddToPlaylist';
 import SearchBar from '../components/SearchBar';
-import Playlists from './Playlists';
-import PlaylistTable from '../components/PlaylistTable';
 import { ThemeContext } from '../utilities/ThemeContext';
 import {
   PlaylistCollectionAddIcon,

@@ -1,16 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  createRef,
-  useContext,
-} from 'react';
+import React, { useEffect, useState, createRef, useContext } from 'react';
 import { createPopper, VirtualElement } from '@popperjs/core';
-import { motion } from 'framer-motion';
-import { Console, timeStamp } from 'node:console';
-import { randomInt } from 'node:crypto';
 import DropdownData from '../types/DropdownData';
 import { ThemeContext } from '../utilities/ThemeContext';
 import { DropdowndirIcon } from './Icons';

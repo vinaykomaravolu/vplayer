@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
-import { motion } from 'framer-motion';
 import { Playlist, Song } from '../../objects/Object';
 import PlaylistTable from './PlaylistTable';
 import { ThemeContext } from '../utilities/ThemeContext';

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/all';
 import { Song } from '../../objects/Object';

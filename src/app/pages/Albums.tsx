@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../components/SearchBar';
-import { Album, Playlist, Song } from '../../objects/Object';
+import { Album, Song } from '../../objects/Object';
 import AlbumCard from '../components/AlbumCard';
 import { ThemeContext } from '../utilities/ThemeContext';
 

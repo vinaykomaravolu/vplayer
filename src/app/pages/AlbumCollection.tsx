@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, Link, useHistory } from 'react-router-dom';
-import { Album, Collection, Song } from '../../objects/Object';
+import { useParams, Link } from 'react-router-dom';
+import { Album, Song } from '../../objects/Object';
 import MusicTable from '../components/MusicTable';
 import DefaultImage from '../../../assets/images/default.png';
 import SearchBar from '../components/SearchBar';

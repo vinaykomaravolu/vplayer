@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Dropdown from './Dropdown';
 import DropdownData from '../types/DropdownData';
 import { Song, Playlist } from '../../objects/Object';
