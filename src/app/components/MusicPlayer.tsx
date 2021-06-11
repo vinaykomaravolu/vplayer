@@ -20,9 +20,9 @@ import {
 import { ThemeContext } from '../utilities/ThemeContext';
 import ThemeCSS from '../utilities/ThemeCSS';
 
-const IconButton = (props: { icon: any; handleClick: () => void }) => {
+const IconButton = (props: { icon: JSX.Element; handleClick: () => void }) => {
   const { icon, handleClick } = props;
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <motion.button
@@ -47,7 +47,7 @@ function MusicPlayer() {
   const [isVolOn, setIsVolOn] = useState<boolean>(false);
   const [Shuffle, setShuffle] = useState<boolean>(false);
   const [Repeat, setRepeat] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   let currentTime = 0;
   let songName = 'Song Name';

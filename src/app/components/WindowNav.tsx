@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../utilities/ThemeContext';
 
 function WindowNav() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   function closeWindow() {
     const remote = window.require ? window.require('electron').remote : null;

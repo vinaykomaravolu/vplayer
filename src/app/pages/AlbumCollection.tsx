@@ -32,7 +32,7 @@ function AlbumCollection() {
   const [albumName, setAlbumName] = useState<string>('');
   const [albumImage, setAlbumImage] = useState<string | undefined>(undefined);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   function playCollection() {
     console.log(`Currently playing ${collection.name}`);
@@ -99,7 +99,7 @@ function AlbumCollection() {
       id="settings"
       className={`section-page overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
-      <div className="flex flex-col flex-nowrap">
+      <div className="flex flex-col flex-nowra">
         <Link to="/Albums" className="w-8 h-8 rounded-full pb-2">
           <motion.button
             id="back"
@@ -153,7 +153,7 @@ function AlbumCollection() {
           </div>
 
           <div
-            className={`text-${theme}-primary-text  truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full`}
+            className={`text-${theme}-primary-text  truncate text-3xl sm:text-4xl xl:text-5xl font-bold pl-4 pb-3 pt-4 justify-start w-full`}
           >
             <div
               className={`w-full text-${theme}-secondary-text truncate text-base font-bold `}
@@ -173,7 +173,7 @@ function AlbumCollection() {
 
             <div>
               <div className="flex flex-row w-full justify-between flex-nowrap ">
-                <div className="flex flex-row flex-nowrap content-center items-center p-0">
+                <div className="flex flex-row flex-nowrap content-center items-center ">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -237,6 +237,7 @@ function AlbumCollection() {
                 <SearchBar
                   state={searchTerm}
                   setState={setSearchTerm}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   handleSearch={(event: any) => {
                     console.log(`Searching ${event.target.value}`);
                   }}

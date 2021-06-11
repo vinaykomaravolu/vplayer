@@ -13,9 +13,8 @@ const pageVariants = {
 
 function Albums() {
   const albums: Album[] = [];
-  const songs: Song[] = [];
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   function checkforDup(Alist: Album[], song: Song) {
     for (let i = 0; i < Alist.length; i += 1) {
@@ -74,6 +73,7 @@ function Albums() {
             <SearchBar
               state={searchTerm}
               setState={setSearchTerm}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               handleSearch={(event: any) => {
                 console.log(`Searching ${event.target.value}`);
               }}

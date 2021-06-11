@@ -6,7 +6,7 @@ import { ThemeContext } from '../utilities/ThemeContext';
 import ThemeCSS from '../utilities/ThemeCSS';
 import { AddToPlaylistExitIcon } from './Icons';
 
-function styles(theme: string): any {
+function styles(theme: string): Modal.Styles {
   return {
     content: {
       top: '50%',
@@ -34,19 +34,9 @@ function AddToPlaylist({
   setModelIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   songsToAdd: Song[];
 }) {
-  let subtitle: any;
   const [playlist, setPlaylist] = useState<Playlist[]>([]);
   const [selected, setSelected] = useState<Playlist[]>([]);
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  function updatePlaylist() {
-    return 0;
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle = '#000';
-  }
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const PLs: Playlist[] = [];
@@ -76,7 +66,6 @@ function AddToPlaylist({
       <Modal
         closeTimeoutMS={200}
         isOpen={modelIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={() => {
           setModelIsOpen(false);
         }}

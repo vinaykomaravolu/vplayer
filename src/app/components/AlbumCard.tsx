@@ -14,8 +14,9 @@ const varients = {
 
 function AlbumCard({ album }: { album: Album }) {
   const [isHover, setIsHover] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function playPlaylistHandle(event: any) {
     event.stopPropagation();
     console.log(`Currently playing ${album.name}`);

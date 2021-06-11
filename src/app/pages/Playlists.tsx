@@ -13,7 +13,7 @@ const pageVariants = {
 function Playlists() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const playlistsList: Playlist[] = [];

@@ -7,7 +7,7 @@ import { ThemeContext } from '../utilities/ThemeContext';
 import { PlayListCardPlayIcon } from './Icons';
 
 function CreatePlayListCard() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <motion.button
@@ -28,8 +28,9 @@ const varients = {
 
 function PlayListCard({ playlist }: { playlist: Playlist }) {
   const [isHover, setIsHover] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function playPlaylistHandle(event: any) {
     event.stopPropagation();
     console.log(`Currently playing ${playlist.name}`);

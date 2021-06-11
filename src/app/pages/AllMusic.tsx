@@ -22,7 +22,7 @@ function AllMusic() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selected, setSelected] = useState<Song[]>([]);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const songsList: Song[] = [];

@@ -14,7 +14,7 @@ function PlaylistRow({
   handleSelect: any;
 }) {
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <motion.div
@@ -51,7 +51,7 @@ function PlaylistTable({
   setSelected: React.Dispatch<React.SetStateAction<Playlist[]>>;
 }) {
   const [PL, setPL] = useState<Playlist[]>();
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleSelected = (playlist: Playlist) => {
     const sel: Playlist[] = [...selected];

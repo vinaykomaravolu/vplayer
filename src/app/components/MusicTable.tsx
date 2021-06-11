@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
@@ -13,10 +14,11 @@ function SongRow({
 }: {
   song: Song;
   i: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleSelect: any;
 }) {
   const [isHover, setIsHover] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <motion.div
@@ -27,7 +29,7 @@ function SongRow({
       // eslint-disable-next-line react/no-array-index-key
       key={i}
       id={`song-${i}`}
-      onDoubleClick={(event) => {
+      onDoubleClick={() => {
         console.log(song);
       }}
       onMouseEnter={() => {
@@ -92,7 +94,7 @@ function MusicTable({
 }) {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortAsc, setSortAsc] = useState<boolean>(true);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleSelected = (song: Song) => {
     const sel: Song[] = [...selected];
@@ -266,14 +268,16 @@ function MusicTable({
         className={`overflow-y-auto h-full scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
       >
         {data
-          .sort(function (a: Song, b: Song) {
+          .sort((a: Song, b: Song): number => {
             if (sortBy === '') {
-              return true;
+              return 1;
             }
-            // eslint-disable-next-line @typescript-eslint/dot-notation
-            const A = a[sortBy];
-            // eslint-disable-next-line @typescript-eslint/dot-notation
-            const B = b[sortBy];
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore: Unreachable code error
+            const A: any = a[sortBy];
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore: Unreachable code error
+            const B: any = b[sortBy];
             if (sortAsc) {
               if (A < B) {
                 return -1;

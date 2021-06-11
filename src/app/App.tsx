@@ -105,7 +105,7 @@ const TestC = () => {
 };
 
 function Main() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Suspense fallback={<TestC />}>

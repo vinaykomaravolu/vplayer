@@ -15,15 +15,18 @@ const Dropdown = ({
 }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const btnDropdownRef: React.RefObject<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Element | VirtualElement | any
   > = createRef();
   const popoverDropdownRef: React.RefObject<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Element | VirtualElement | any
   > = createRef();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const openDropdownPopover = (event: any) => {
     event.preventDefault();
     if (btnDropdownRef.current) {
@@ -131,7 +134,7 @@ const Dropdown = ({
               } bg-${theme}-primary-3 text-base z-50 flex flex-col flex-nowrap text-left rounded shadow-lg `}
               style={{ minWidth: '12rem' }}
             >
-              {data.children?.map((child, i) => {
+              {data.children?.map((child) => {
                 return (
                   <div
                     className={`text-sm font-normal h-8 w-full whitespace-nowrap bg-transparent text-${theme}-primary-text`}
