@@ -72,7 +72,7 @@ function Playlists() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className={`section-page text-${theme}-primary-text`}
+      className={`section-page text-${theme}-primary-text overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
       <div className="flex flex-col h-auto">
         <div className="section-title">Playlists</div>

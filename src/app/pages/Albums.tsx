@@ -64,7 +64,7 @@ function Albums() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="section-page"
+      className={`section-page overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
       id="albums"
     >
       <div className="flex flex-col h-auto">

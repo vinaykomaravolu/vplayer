@@ -94,7 +94,7 @@ function PlaylistCollection() {
       animate="animate"
       exit="exit"
       id="settings"
-      className="section-page"
+      className={`section-page overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
       <div className="flex flex-col flex-nowrap">
         <Link to="/Playlists" className="w-8 h-8 rounded-full pb-2">

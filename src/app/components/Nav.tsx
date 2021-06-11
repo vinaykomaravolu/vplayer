@@ -61,7 +61,7 @@ function Nav() {
   return (
     <div
       data-testid="nav"
-      className={`transition-width transition-slowest ease duration-250 ease-in-out flex flex-col flex-shrink-1 ${
+      className={`transition-width transition-slowest ease duration-250 ease-in-out flex flex-col flex-shrink-1  ${
         isOpen ? 'w-11' : 'w-48'
       } h-full bg-${theme}-primary-3 shadow-2xl`}
     >
@@ -144,7 +144,7 @@ function Nav() {
       </div>
 
       {isOpen ? null : (
-        <div className="w-full h-1/2 p-2 flex flex-nowrap">
+        <div className="w-full min-h-0 max-h-56 p-2 flex flex-nowrap">
           <div
             className={`flex flex-nowrap bg-${theme}-primary-2 rounded-md w-full h-full `}
           >
