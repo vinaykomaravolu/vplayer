@@ -22,7 +22,7 @@ function AllMusic() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selected, setSelected] = useState<Song[]>([]);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const songsList: Song[] = [];
@@ -53,7 +53,7 @@ function AllMusic() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="section-page"
+      className={`section-page overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
       <div className="flex flex-col h-full">
         <AddToPlaylist
@@ -127,6 +127,7 @@ function AllMusic() {
             <SearchBar
               state={searchTerm}
               setState={setSearchTerm}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               handleSearch={(event: any) => {
                 console.log(`Searching ${event.target.value}`);
               }}

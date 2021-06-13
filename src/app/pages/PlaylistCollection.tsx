@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, Link, useHistory } from 'react-router-dom';
-import { Album, Collection, Playlist, Song } from '../../objects/Object';
+import { useParams, Link } from 'react-router-dom';
+import { Collection, Song } from '../../objects/Object';
 import MusicTable from '../components/MusicTable';
 import DefaultImage from '../../../assets/images/default.png';
 import AddToPlaylist from '../components/AddToPlaylist';
 import SearchBar from '../components/SearchBar';
-import Playlists from './Playlists';
-import PlaylistTable from '../components/PlaylistTable';
 import { ThemeContext } from '../utilities/ThemeContext';
 import {
   PlaylistCollectionAddIcon,
@@ -37,7 +35,7 @@ function PlaylistCollection() {
     undefined
   );
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   function playCollection() {
     console.log(`Currently playing ${collection.name}`);
@@ -96,7 +94,7 @@ function PlaylistCollection() {
       animate="animate"
       exit="exit"
       id="settings"
-      className="section-page"
+      className={`section-page overflow-y-auto scrollbar-thin scrollbar-thumb-${theme}-secondary-2 scrollbar-track-transparent  scrollbar-thumb-rounded-full scrollbar-track-rounded-full`}
     >
       <div className="flex flex-col flex-nowrap">
         <Link to="/Playlists" className="w-8 h-8 rounded-full pb-2">
@@ -152,7 +150,7 @@ function PlaylistCollection() {
           </div>
 
           <div
-            className={`text-${theme}-secondary-1 truncate text-3xl sm:text-4xl xl:text-5xl font-bold p-4 justify-start w-full`}
+            className={`text-${theme}-secondary-1 truncate text-3xl sm:text-4xl xl:text-5xl font-bold pl-4 pb-3 pt-4 justify-start w-full`}
           >
             <div
               className={`w-full text-${theme}-secondary-text truncate text-lg font-bold `}
@@ -259,6 +257,7 @@ function PlaylistCollection() {
                 <SearchBar
                   state={searchTerm}
                   setState={setSearchTerm}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   handleSearch={(event: any) => {
                     console.log(`Searching ${event.target.value}`);
                   }}

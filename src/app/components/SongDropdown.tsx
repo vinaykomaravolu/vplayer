@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import DropdownData from '../types/DropdownData';
 import { Song, Playlist } from '../../objects/Object';
-import { ThemeContext } from '../utilities/ThemeContext';
 import { SongDropdownMoreIcon } from './Icons';
 
 function SongDropDown({ song }: { song: Song }) {
   const [loadPlaylist, setLoadPlaylist] = useState<boolean>(false);
-  const { theme, setTheme } = useContext(ThemeContext);
 
   function addToPlaylist(s: Song, p: Playlist) {
     console.log(`Added ${s.name} to playlist ${p.name}`);

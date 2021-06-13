@@ -11,7 +11,7 @@ const pageVariants = {
 };
 
 function Home() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <motion.div

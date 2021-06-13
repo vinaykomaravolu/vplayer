@@ -5,7 +5,7 @@ import { ThemeContext } from '../utilities/ThemeContext';
 
 function PlayListsMini() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const playlistsList: Playlist[] = [];

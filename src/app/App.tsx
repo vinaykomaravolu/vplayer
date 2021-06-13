@@ -105,18 +105,18 @@ const TestC = () => {
 };
 
 function Main() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <Suspense fallback={<TestC />}>
-      <HashRouter>
-        <div className="w-screen h-screen" id="app-root">
-          <div className="h-full w-full flex flex-col">
-            <div
-              data-testid="app"
-              className={`bg-gradient-to-t from-${theme}-primary-1 to-${theme}-primary-3 flex flex-row h-full overflow-y-auto `}
-            >
-              <WindowNav />
+    <HashRouter>
+      <div className="w-screen h-screen" id="app-root">
+        <div className="h-full w-full flex flex-col">
+          <div
+            data-testid="app"
+            className={`bg-gradient-to-t from-${theme}-primary-1 to-${theme}-primary-3 flex flex-row h-full overflow-y-auto `}
+          >
+            <WindowNav />
+            <Suspense fallback={<h1>Loading</h1>}>
               <div className="h-full">
                 <Nav />
               </div>
@@ -137,14 +137,15 @@ function Main() {
                   </Switch>
                 </AnimatePresence>
               </div>
-            </div>
-            <div className="h-28 w-full">
-              <MusicPlayer />
-            </div>
+            </Suspense>
+          </div>
+
+          <div className="h-28 w-full">
+            <MusicPlayer />
           </div>
         </div>
-      </HashRouter>
-    </Suspense>
+      </div>
+    </HashRouter>
   );
 }
 
