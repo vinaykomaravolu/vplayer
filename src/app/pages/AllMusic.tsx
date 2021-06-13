@@ -127,6 +127,7 @@ function AllMusic() {
             <SearchBar
               state={searchTerm}
               setState={setSearchTerm}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               handleSearch={(event: any) => {
                 console.log(`Searching ${event.target.value}`);
               }}
