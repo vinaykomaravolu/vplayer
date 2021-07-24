@@ -133,6 +133,12 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('before-quit', () => {
+  // Respect the OSX convention of having the application in memory even
+  // after all windows have been closed
+  console.log('this application has quit');
+});
+
 app.whenReady().then(createWindow).catch(console.log);
 
 app.on('activate', () => {
@@ -148,6 +154,9 @@ const { ipcMain } = require('electron');
 // Example code for render and main process interaction
 const ignorefiles = ['*.html'];
 const recursive = require('recursive-readdir');
+const routes = require('./routes');
+
+routes.init();
 
 ipcMain.on('asynchronous-message', (event: any, arg: any) => {
   recursive(arg, ignorefiles, (err: any, files: File[]) => {
