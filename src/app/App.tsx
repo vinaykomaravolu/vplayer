@@ -139,7 +139,6 @@ function Main() {
               </div>
             </Suspense>
           </div>
-
           <div className="h-28 w-full">
             <MusicPlayer />
           </div>
