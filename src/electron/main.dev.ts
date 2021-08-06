@@ -14,6 +14,7 @@ import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import * as fs from 'fs';
+import { data } from 'autoprefixer';
 
 const path = require('path');
 const url = require('url');
@@ -155,7 +156,12 @@ const { ipcMain } = require('electron');
 const ignorefiles = ['*.html'];
 const recursive = require('recursive-readdir');
 const routes = require('./routes');
+const database = require('./database');
 
+database.getInstance();
+database.getInstance();
+database.getInstance();
+database.getInstance();
 routes.init();
 
 ipcMain.on('asynchronous-message', (event: any, arg: any) => {

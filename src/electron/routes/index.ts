@@ -22,6 +22,13 @@
 * musicplayer-play
 */
 
+/* User side
+1. Add paths to watch for songs
+  -
+2. Get all songs from database
+3. User clicks song and gets path from backend to load onto houwler to play song
+*/
+
 const collection = require('./collection');
 const filesystem = require('./filesystem');
 const musicplayer = require('./musicplayer');
@@ -32,4 +39,10 @@ function init() {
   musicplayer.initMusicplayer();
 }
 
-module.exports = { init };
+function cleanup() {
+  collection.cleanupCollection();
+  filesystem.cleanupFilesystem();
+  musicplayer.cleanupMusicplayer();
+}
+
+module.exports = { init, cleanup };
