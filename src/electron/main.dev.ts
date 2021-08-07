@@ -133,10 +133,16 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+const { ipcMain } = require('electron');
+const recursive = require('recursive-readdir');
+const database = require('./database');
+
+database.getInstance();
 
 app.on('before-quit', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
+  database.getInstance().save();
   console.log('this application has quit');
 });
 
@@ -150,18 +156,12 @@ app.on('activate', () => {
 
 // IPC testing
 // In main process.
-const { ipcMain } = require('electron');
 
 // Example code for render and main process interaction
 const ignorefiles = ['*.html'];
-const recursive = require('recursive-readdir');
-const routes = require('./routes');
-const database = require('./database');
 
-database.getInstance();
-database.getInstance();
-database.getInstance();
-database.getInstance();
+const routes = require('./routes');
+
 routes.init();
 
 ipcMain.on('asynchronous-message', (event: any, arg: any) => {
