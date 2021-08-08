@@ -2,6 +2,22 @@ import { Collection, Directory, Song } from '../../objects/Object';
 
 const Loki = require('lokijs');
 
+function indexOfSong(songarray: Song[], song: Song): number {
+  for (let i = 0; i < songarray.length; i += 1) {
+    if (
+      songarray[i].name === song.name &&
+      songarray[i].artists.every((val, index) => val === song.artists[index]) &&
+      songarray[i].album === song.album &&
+      songarray[i].path === song.path &&
+      songarray[i].publish_year === song.publish_year &&
+      songarray[i].length === song.length
+    ) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 class Database {
   [x: string]: any;
 
@@ -29,73 +45,8 @@ class Database {
         this.theme = this.db.addCollection('theme');
         this.theme.insert({ theme: 'theme-amber' });
       }
-
-      this.addDirectory({
-        path: '0',
-      });
-      this.addDirectory({
-        path: '1',
-      });
-      this.addDirectory({
-        path: '2',
-      });
-      this.addDirectory({
-        path: '4',
-      });
-      this.addDirectory({
-        path: '5',
-      });
-
-      this.setTheme('theme-chess');
-      this.updateCollection(this.MAIN, (collection: Collection) => {
-        collection.name = 'TESTING';
-        return collection;
-      });
-      this.addCollection({
-        name: 'testplaylust',
-        songs: [
-          {
-            name: Math.random().toString(36).substring(7),
-            artists: ['Takafumi Imamura', 'Takafumi Imamura'],
-            length: 197,
-            publish_year: 1998,
-            path: ['A:\\Music\\Pulse'],
-            album: Math.random().toString(36).substring(7),
-          },
-        ],
-        type: 'playlist',
-      });
-      this.addSongToCollection('testplaylust', [
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['vinay'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse2.0'],
-          album: Math.random().toString(36).substring(7),
-        },
-      ]);
-      this.addSongToCollection('testplaylust', [
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['vinay4234'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse2.0'],
-          album: Math.random().toString(36).substring(7),
-        },
-      ]);
-      this.removeSongFromCollection('testplaylust', [
-        {
-          name: Math.random().toString(36).substring(7),
-          artists: ['vinay4234'],
-          length: 197,
-          publish_year: 1998,
-          path: ['A:\\Music\\Pulse2.0'],
-          album: Math.random().toString(36).substring(7),
-        },
-      ]);
     };
+
     this.db = new Loki('database.db', {
       autoload: true,
       autoloadCallback: databaseInitialize,
@@ -104,7 +55,6 @@ class Database {
     });
   }
 
-  // implement the autoloadback referenced in loki constructor
   setTheme(theme: string) {
     const currentTheme = this.theme.findOne({});
     currentTheme.theme = theme;
@@ -120,7 +70,7 @@ class Database {
     const collection = this.collections.findOne({ name: collectionName });
     collection.songs = collection.songs.concat(songs);
     collection.songs = collection.songs.filter((item: any, index: number) => {
-      return collection.songs.indexOf(item) === index;
+      return indexOfSong(collection.songs, item) === index;
     });
     this.collections.update(collection);
   }
@@ -144,7 +94,18 @@ class Database {
   }
 
   getCollection(name: string) {
-    return this.collections.find({ name });
+    return this.collections.findOne({ name });
+  }
+
+  getCollectionNames() {
+    return this.collections
+      .find({})
+      .map((collection: Collection) => collection.name);
+  }
+
+  getSongsFromCollection(collectionName: string) {
+    const collection = this.collections.findOne({ name: collectionName });
+    return collection.songs;
   }
 
   removeCollection(name: string) {
@@ -155,12 +116,11 @@ class Database {
     this.directories.remove({ path });
   }
 
-  // fix this
   removeSongFromCollection(collectionName: string, songs: Song[]) {
     const collection = this.collections.findOne({ name: collectionName });
     for (let i = 0; i < songs.length; i += 1) {
       const song = songs[i];
-      const index = collection.songs.indexOf(song);
+      const index = indexOfSong(collection.songs, song);
       if (index > -1) {
         collection.songs.splice(index, 1);
       }
@@ -185,7 +145,6 @@ class Database {
     updateFunction: (collection: Collection) => void
   ) {
     const collection = this.collections.findOne({ name });
-    console.log(collection);
     if (collection !== null) {
       const updatedCollection = updateFunction(collection);
       this.collections.update(updatedCollection);

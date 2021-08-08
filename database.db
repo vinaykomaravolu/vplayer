@@ -8,7 +8,7 @@
           "path": "0",
           "meta": {
             "revision": 0,
-            "created": 1628386201390,
+            "created": 1628458428530,
             "version": 0
           },
           "$loki": 1
@@ -17,7 +17,7 @@
           "path": "1",
           "meta": {
             "revision": 0,
-            "created": 1628386201390,
+            "created": 1628458428530,
             "version": 0
           },
           "$loki": 2
@@ -26,7 +26,7 @@
           "path": "2",
           "meta": {
             "revision": 0,
-            "created": 1628386201390,
+            "created": 1628458428530,
             "version": 0
           },
           "$loki": 3
@@ -35,7 +35,7 @@
           "path": "4",
           "meta": {
             "revision": 0,
-            "created": 1628386201390,
+            "created": 1628458428530,
             "version": 0
           },
           "$loki": 4
@@ -44,7 +44,7 @@
           "path": "5",
           "meta": {
             "revision": 0,
-            "created": 1628386201390,
+            "created": 1628458428531,
             "version": 0
           },
           "$loki": 5
@@ -101,9 +101,9 @@
           "type": "collection",
           "meta": {
             "revision": 1,
-            "created": 1628386201390,
+            "created": 1628458428530,
             "version": 0,
-            "updated": 1628386201393
+            "updated": 1628458428531
           },
           "$loki": 1
         },
@@ -111,49 +111,43 @@
           "name": "testplaylust",
           "songs": [
             {
-              "name": "coyn5a",
+              "name": "n2p5r",
               "artists": [
                 "Takafumi Imamura",
                 "Takafumi Imamura"
               ],
               "length": 197,
               "publish_year": 1998,
-              "path": [
-                "A:\\Music\\Pulse"
-              ],
-              "album": "5mb2e"
+              "path": "A:\\Music\\Pulse",
+              "album": "rly8mf"
             },
             {
-              "name": "m3zza7g",
+              "name": "mx3hf4",
               "artists": [
                 "vinay"
               ],
               "length": 197,
               "publish_year": 1998,
-              "path": [
-                "A:\\Music\\Pulse2.0"
-              ],
-              "album": "21gua4"
+              "path": "A:\\Music\\Pulse2.0",
+              "album": "ew8a8r"
             },
             {
-              "name": "co11y",
+              "name": "t96z6l",
               "artists": [
-                "vinay4234"
+                "vinay"
               ],
               "length": 197,
               "publish_year": 1998,
-              "path": [
-                "A:\\Music\\Pulse2.0"
-              ],
-              "album": "lqfm0r"
+              "path": "A:\\Music\\Pulse2.0",
+              "album": "o6lq4d"
             }
           ],
           "type": "playlist",
           "meta": {
-            "revision": 3,
-            "created": 1628386201393,
+            "revision": 6,
+            "created": 1628458428531,
             "version": 0,
-            "updated": 1628386765518
+            "updated": 1628458457431
           },
           "$loki": 2
         }
@@ -209,10 +203,10 @@
         {
           "theme": "theme-chess",
           "meta": {
-            "revision": 3,
-            "created": 1628386201390,
+            "revision": 2,
+            "created": 1628458428530,
             "version": 0,
-            "updated": 1628386765518
+            "updated": 1628458457431
           },
           "$loki": 1
         }
@@ -277,7 +271,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1628386765342
+    "started": 1628458457271
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
