@@ -12,7 +12,7 @@ export interface Song {
   artists: string[];
   length: number; // in seconds
   publish_year: number;
-  path: string[];
+  path: string;
   album: string;
 }
 
