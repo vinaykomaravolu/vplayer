@@ -8,7 +8,7 @@
           "path": "0",
           "meta": {
             "revision": 0,
-            "created": 1628376441728,
+            "created": 1628386201390,
             "version": 0
           },
           "$loki": 1
@@ -17,7 +17,7 @@
           "path": "1",
           "meta": {
             "revision": 0,
-            "created": 1628376441728,
+            "created": 1628386201390,
             "version": 0
           },
           "$loki": 2
@@ -26,7 +26,7 @@
           "path": "2",
           "meta": {
             "revision": 0,
-            "created": 1628376441728,
+            "created": 1628386201390,
             "version": 0
           },
           "$loki": 3
@@ -35,7 +35,7 @@
           "path": "4",
           "meta": {
             "revision": 0,
-            "created": 1628376441728,
+            "created": 1628386201390,
             "version": 0
           },
           "$loki": 4
@@ -44,7 +44,7 @@
           "path": "5",
           "meta": {
             "revision": 0,
-            "created": 1628376441728,
+            "created": 1628386201390,
             "version": 0
           },
           "$loki": 5
@@ -98,17 +98,69 @@
         {
           "name": "TESTING",
           "songs": [],
+          "type": "collection",
           "meta": {
-            "revision": 2,
-            "created": 1628376218003,
+            "revision": 1,
+            "created": 1628386201390,
             "version": 0,
-            "updated": 1628376712221
+            "updated": 1628386201393
           },
           "$loki": 1
+        },
+        {
+          "name": "testplaylust",
+          "songs": [
+            {
+              "name": "coyn5a",
+              "artists": [
+                "Takafumi Imamura",
+                "Takafumi Imamura"
+              ],
+              "length": 197,
+              "publish_year": 1998,
+              "path": [
+                "A:\\Music\\Pulse"
+              ],
+              "album": "5mb2e"
+            },
+            {
+              "name": "m3zza7g",
+              "artists": [
+                "vinay"
+              ],
+              "length": 197,
+              "publish_year": 1998,
+              "path": [
+                "A:\\Music\\Pulse2.0"
+              ],
+              "album": "21gua4"
+            },
+            {
+              "name": "co11y",
+              "artists": [
+                "vinay4234"
+              ],
+              "length": 197,
+              "publish_year": 1998,
+              "path": [
+                "A:\\Music\\Pulse2.0"
+              ],
+              "album": "lqfm0r"
+            }
+          ],
+          "type": "playlist",
+          "meta": {
+            "revision": 3,
+            "created": 1628386201393,
+            "version": 0,
+            "updated": 1628386765518
+          },
+          "$loki": 2
         }
       ],
       "idIndex": [
-        1
+        1,
+        2
       ],
       "binaryIndices": {},
       "constraints": null,
@@ -131,7 +183,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 1,
+      "maxId": 2,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -158,9 +210,9 @@
           "theme": "theme-chess",
           "meta": {
             "revision": 3,
-            "created": 1628376218003,
+            "created": 1628386201390,
             "version": 0,
-            "updated": 1628376712219
+            "updated": 1628386765518
           },
           "$loki": 1
         }
@@ -225,7 +277,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1628376712060
+    "started": 1628386765342
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
