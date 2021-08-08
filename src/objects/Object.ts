@@ -1,7 +1,10 @@
+type CollectionType = 'playlist' | 'collection' | 'album';
+
 export interface Collection {
   name: string;
   songs: Song[];
   image?: string;
+  type: CollectionType;
 }
 
 export interface Song {
