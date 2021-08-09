@@ -129,15 +129,10 @@ class Database {
   }
 
   removeSongFromAllCollections(songs: Song[]) {
-    this.collections.update(
-      {},
-      {
-        $pull: {
-          songs,
-        },
-      },
-      { multi: true }
-    );
+    const collections = this.collections.find({});
+    collections.forEach((collection: Collection) => {
+      this.removeSongFromCollection(collection.name, songs);
+    });
   }
 
   updateCollection(
