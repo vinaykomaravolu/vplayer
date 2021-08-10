@@ -129,7 +129,11 @@ class Database {
   }
 
   removeSongFromAllCollections(songs: Song[]) {
-    const collections = this.collections.find({});
+    const collections = this.collections
+      .find({})
+      .map((collection: Collection) => {
+        return collection.name;
+      });
     collections.forEach((collection: Collection) => {
       this.removeSongFromCollection(collection.name, songs);
     });
