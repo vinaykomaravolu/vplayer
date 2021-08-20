@@ -154,6 +154,23 @@ app.on('activate', () => {
   if (mainWindow === null) createWindow();
 });
 
+/*
+  loadSongsFromDirectories(){
+
+    if directors in database:
+      loop through each directory
+        if song does not exist in main collection
+          add song to collection
+          add song to album -> how are albums created
+  }
+*/
+
+/*
+ if directories change:
+  check what changed:
+    loadSongs(songs: songs[]);
+*/
+
 // IPC testing
 // In main process.
 

@@ -1,4 +1,17 @@
 type CollectionType = 'playlist' | 'collection' | 'album';
+type Types = CollectionType | 'song';
+
+export interface Response {
+  sucess: boolean;
+  data:
+    | Song
+    | Collection
+    | Directory
+    | Song[]
+    | Collection[]
+    | Directory[]
+    | null;
+}
 
 export interface Collection {
   name: string;

@@ -22,7 +22,7 @@ const TestC = () => {
   const [searchpath, setSearchPath] = useState<string>('');
   const [theme, setTheme] = useState<boolean>(true);
 
-  ipcRenderer.on('asynchronous-reply', (event: any, arg: any) => {
+  ipcRenderer.on('asynchronous-reply', (event: any, arg) => {
     setFiles(arg);
   });
 
